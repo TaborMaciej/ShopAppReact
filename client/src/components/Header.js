@@ -7,20 +7,22 @@ import "../css/Header.css"
 
 function Header(){
     return(
-        <nav className="nav-bar">
-            <div className="nav-left-box">
-                <Link to="/"><img src="#" alt="Company logo" className="nav-logo"/></Link>
-            </div>
-
-            <div className="nav-right-box">
+  
+            <nav className="nav-bar">
+            
+            <Link to="/"><img src="#" alt="Company logo" className="nav-logo"/></Link>
                     <div className="search-bar">
                         <img className="nav-img" src={GlassIMG} alt="Search"/>
                         <input type="text"/>
-                    </div>
+                   
                     <Link to="/Cart"><img className="nav-img" src={CartIMG} alt="Cart"/></Link>
-                    <Link to="/Login"><img className="nav-img" src={UserIMG} alt="User"/>Sign in</Link>
-            </div>
-        </nav>
+                 
+                    <img className="nav-img" src={UserIMG} alt="User"/>
+                    
+                    <Link to="/Login">Sign in </Link>
+                    <Link to="/register">Register</Link>
+                    </div>
+            </nav>
 
     );
 }
