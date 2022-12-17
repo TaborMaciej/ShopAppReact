@@ -39,6 +39,18 @@ app.post("/api/login", (req, res) => {
     
 });
 
+app.get("/api/games", (req, res) =>{
+    const sqlSelect = 'SELECT gra.Nazwa_gry, gatunek.Nazwa AS "Gatunek", wydawnictwo.Nazwa AS "Wydawnictwo" FROM gra ' +
+                    'LEFT JOIN gatunek ON gra.ID_gatunek = gatunek.ID ' +
+                    'LEFT JOIN wydawnictwo ON gra.ID_wydawnictwo = wydawnictwo.ID'
+
+    db.query(sqlSelect, (err, result) =>{
+        if(err) throw err;
+        res.send(result);
+    })
+    
+});
+
 app.listen(3001, () =>{
-    console.log("server running 3001");
+    console.log("Server running on port 3001");
 });

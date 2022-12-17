@@ -10,8 +10,6 @@ function Login() {
 
   const navigate = useNavigate();
   const TryLogin = () => {
-  console.log(email_val);
-  console.log(password_val);
   
   Axios
     .post("http://localhost:3001/api/login", {email: email_val, password: password_val})
