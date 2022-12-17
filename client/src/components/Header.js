@@ -3,16 +3,16 @@ import {Link} from "react-router-dom";
 import CartIMG from "../imgs/cart-img.svg";
 import GlassIMG from "../imgs/glass-img.svg";
 import UserIMG from "../imgs/user-img.svg";
-import "../css/Navbar.css"
+import "../css/Header.css"
 
 function Header(){
     return(
         <nav className="nav-bar">
-            <div className="nav-right-box">
+            <div className="nav-left-box">
                 <Link to="/"><img src="#" alt="Company logo" className="nav-logo"/></Link>
             </div>
 
-            <div className="nav-left-box">
+            <div className="nav-right-box">
                     <div className="search-bar">
                         <img className="nav-img" src={GlassIMG} alt="Search"/>
                         <input type="text"/>
