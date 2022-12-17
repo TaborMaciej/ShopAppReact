@@ -29,9 +29,9 @@ function Login() {
   return (
       <div className="App">
         <h1>Login</h1>
-        <label for="email_">E-mail</label>
+        <label htmlFor="email_">E-mail</label>
         <input id="email_" type="email" name="email_val" onChange={ (e) => setEmail(e.target.value) }></input>
-        <label for="password_">Haslo</label>
+        <label htmlFor="password_">Haslo</label>
         <input id="password_" type="password" name="password" onChange={ (e) => setPassword(e.target.value) }></input>
         <button onClick={ TryLogin }>Login</button>
       </div>

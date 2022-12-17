@@ -26,16 +26,15 @@ app.post("/api/login", (req, res) => {
     "WHERE osoba.Email = ? AND haslo.Nazwa = ?";
     db.query(sqlSelect, [email_, password_],(err, result)=>{
         if (err) throw err;
-        console.log(result);
         if (result.length > 0)
         {
-            console.log("Poprawnie zalogowano uzytkownika: " + email_)
+            console.log("Succesfully logged the user: " + email_)
             res.send(true);
         }
         else
+            console.log("User has not been logged in: " + email_)
             res.send(false);
             
-            console.log("Uzytkownik nie zostal zalogowany: " + email_)
     }) 
     
 });
