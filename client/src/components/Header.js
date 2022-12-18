@@ -11,16 +11,22 @@ function Header(){
             <nav className="nav-bar">
             
             <Link to="/"><img src="#" alt="Company logo" className="nav-logo"/></Link>
-                    <div className="search-bar">
-                        <img className="nav-img" src={GlassIMG} alt="Search"/>
-                        <input type="text"/>
-                   
-                    <Link to="/Cart"><img className="nav-img" src={CartIMG} alt="Cart"/></Link>
-                 
-                    <img className="nav-img" src={UserIMG} alt="User"/>
-                    
-                    <Link to="/Login">Sign in </Link>
-                    <Link to="/register">Register</Link>
+                    <div className="right-nav">
+
+                      
+                        <input className="serach-bar" type="text"/>
+                        <button type="submit"><img className="nav-img"src={GlassIMG} alt="search"></img></button>
+                     
+                        <Link to="/Cart"><img className="nav-im" src={CartIMG} alt="Cart"/></Link>
+                        <img className="nav-img-user" src={UserIMG} alt="User"/>     
+                        <ul>
+                        
+                        <li className="hover-animation"><Link to="/Login">Sign in </Link></li>
+                        <li className="hover-animation"><Link to="/register">Register</Link></li>
+                            
+                        </ul>              
+                  
+
                     </div>
             </nav>
 
