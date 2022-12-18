@@ -28,7 +28,6 @@ app.post("/api/login", (req, res) => {
         if (err) throw err;
         if (result.length > 0){
             console.log("Succesfully logged the user: " + email_)
-            console.log(result)
             res.send({ ID: result[0].ID, Nazwa: result[0].Imie });
         }
         else{

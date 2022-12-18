@@ -1,14 +1,16 @@
-import React, {useState} from 'react';
+import React, {useState, useContext} from 'react';
 import Axios from 'axios'
+import { useNavigate } from "react-router-dom";
+import { userDataContext } from "../App.js"
 import '../css/Login.css';
 
 function Login() {
 
-  const [userData, setUserData] = useState({});
+  const {userData, setUserData} = useContext(userDataContext);
   const [email_val, setEmail] = useState("");
   const [password_val, setPassword] = useState("");
   const [loginMsg, setLoginMsg] = useState("");
-
+  const navigation = useNavigate();
   const TryLogin = () => {
   
   Axios
@@ -19,7 +21,8 @@ function Login() {
         
       else{
         setUserData(response.data);
-        setLoginMsg("Witaj, " + response.data.Nazwa)
+        setLoginMsg("");
+        navigation("/");
       }
     })
     .catch((err) => console.log(err));
