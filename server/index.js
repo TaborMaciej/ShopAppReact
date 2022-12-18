@@ -22,18 +22,19 @@ app.post("/api/login", (req, res) => {
     const email_ = req.body.email;
     const password_ = req.body.password;
 
-    const sqlSelect = "SELECT osoba.Email, haslo.Nazwa FROM osoba INNER JOIN haslo ON osoba.ID_haslo = haslo.ID " +
+    const sqlSelect = "SELECT osoba.ID, osoba.Imie, osoba.Email FROM osoba INNER JOIN haslo ON osoba.ID_haslo = haslo.ID " +
     "WHERE osoba.Email = ? AND haslo.Nazwa = ?";
     db.query(sqlSelect, [email_, password_],(err, result)=>{
         if (err) throw err;
-        if (result.length > 0)
-        {
+        if (result.length > 0){
             console.log("Succesfully logged the user: " + email_)
-            res.send(true);
+            console.log(result)
+            res.send({ ID: result[0].ID, Nazwa: result[0].Imie });
         }
-        else
+        else{
             console.log("User has not been logged in: " + email_)
             res.send(false);
+        }
             
     }) 
     

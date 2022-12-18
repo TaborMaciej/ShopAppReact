@@ -6,7 +6,13 @@ import "../css/Home.css"
 function Home() {
 
   const [gameData, SetGameData] = useState([]);
+  const [selectRequest, SetSelectRequest] = useState(true);
   
+  useEffect(() => {
+    SetGameData([]);
+    SetSelectRequest(true);
+  }, []);
+
   useEffect(() => {
     const source = Axios.CancelToken.source();
   
@@ -18,6 +24,7 @@ function Home() {
         SetGameData(response.data);
       })
       .catch((err) => {
+        SetSelectRequest(false);
         if (Axios.isCancel(err)) {
           console.log("Request canceled", err.message);
         } else {
@@ -33,13 +40,17 @@ function Home() {
   return (
     <div>
       <h1>Home page</h1>
-      {gameData.length <= 0 ? (
-      <p>Loading...</p>
-    ) : (
-      <div className="products-box">
-        {gameData.map((element) => <Product data={element} key={element.id} />)}
-      </div>
-    )}
+
+      {!selectRequest ? ( <h3>Error! Could not load data.</h3> ) :
+      (
+        gameData.length <= 0 ? (
+          <h3>Loading...</h3>) : 
+        (
+          <div className="products-box">
+            {gameData.map((element) => <Product data={element} key={element.id} />)}
+          </div>
+        )
+      )}
     </div>
   );
 }
