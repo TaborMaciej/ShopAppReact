@@ -15,7 +15,7 @@ function Header(){
 
                       
                         <input className="serach-bar" type="text"/>
-                        <button type="button"><img className="nav-img"src={GlassIMG} alt="search"></img></button>
+                        <button type="submit"><img className="nav-img"src={GlassIMG} alt="search"></img></button>
                      
                         <Link to="/Cart"><img className="nav-im" src={CartIMG} alt="Cart"/></Link>
                         <img className="nav-img-user" src={UserIMG} alt="User"/>     
