@@ -8,6 +8,7 @@ import UserLogged from "./UserLogged";
 import UserNotLogged from "./UserNotLogged";
 
 function Header(){
+    // eslint-disable-next-line
     const {userData, setUserData} = useContext(userDataContext);
 
     return(
@@ -20,12 +21,7 @@ function Header(){
 
             <Link to="/Cart"><img className="nav-im" src={CartIMG} alt="Cart"/></Link>
 
-            {userData.Nazwa ? 
-                <UserLogged />
-                :
-                <UserNotLogged />
-            }
-           
+            {userData.Nazwa ? <UserLogged /> :<UserNotLogged />}
         </div>
     </nav>
     );

@@ -47,7 +47,8 @@ function Home() {
           <h3>Loading...</h3>) : 
         (
           <div className="products-box">
-            {gameData.map((element) => <Product data={element} key={element.id} />)}
+            {gameData.map((element) => <Product data={element} key={element.ID} />)}
+            {console.log(gameData)}
           </div>
         )
       )}

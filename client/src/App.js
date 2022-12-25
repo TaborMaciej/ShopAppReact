@@ -5,7 +5,6 @@ import Login from "./components/Login.js";
 import Register from "./components/Register.js";
 import Header from "./components/Header.js"
 import Cart from "./components/Cart.js"
-import Footer from "./components/Footer.js"
 
 const userDataContext = createContext();
 
@@ -26,7 +25,6 @@ function App() {
             <Route exact path="/" element={<Home />} />
             <Route exact path="/register" element={<Register />} />
           </Routes>
-        <Footer />   
       </Router>
     </userDataContext.Provider>
   );
