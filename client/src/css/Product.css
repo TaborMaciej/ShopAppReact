@@ -5,4 +5,11 @@
     margin: 5px;
     padding: 10px;
     color: aliceblue;
+    
+}
+
+.product-img{
+    height: 400px;
+    width: 250px;
+    object-fit: center;
 }

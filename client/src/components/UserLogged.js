@@ -15,7 +15,7 @@ function UserNotLogged() {
     return (
 
         <ul className="nav-bar">
-            <li className="logged-box-item">{"Witaj, " + userData.Nazwa}</li>
+            <li className="logged-box-item">{"Witaj, " + userData.Nazwa + (userData.isEmployee ? " !!!": "")}</li>
             {/*<li className="logged-box-item"><img className="nav-im" src={UserIMG} alt="User"/></li>*/}
             <li className="hover-animation sign-out" onClick={() => setIsLogoutOpen(true)}> <p className='box-animation'>Sign out</p></li>
             <Modal open={isLogoutOpen} onClose={() => setIsLogoutOpen(false)}>

@@ -5,7 +5,8 @@ import { DataContext } from "../App.js"
 import '../css/Login.css';
 
 function Login() {
-  const setUserData = useContext(DataContext);
+  // eslint-disable-next-line
+  const {userData, setUserData} = useContext(DataContext);
   const [email_val, setEmail] = useState("");
   const [password_val, setPassword] = useState("");
   const [loginMsg, setLoginMsg] = useState("");

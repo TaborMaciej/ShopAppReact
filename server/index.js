@@ -23,49 +23,51 @@ app.post("/api/login", (req, res) => {
 
     const email_ = req.body.email;
     const password_ = req.body.password;
-    let send_back;
-    const sqlSelect = "SELECT osoba.ID, osoba.Imie, osoba.Email FROM osoba INNER JOIN haslo ON osoba.ID_haslo = haslo.ID " +
-    "WHERE osoba.Email = ? AND haslo.Nazwa = ?";
-    db.query(sqlSelect, [email_, password_],(err, result)=>{
+    const sqlSelectEmployee = "SELECT pracownik.ID, osoba.Imie, haslo.Email, haslo.Haslo FROM pracownik"+
+    " INNER JOIN osoba ON pracownik.ID_osoba = osoba.ID " +
+    " INNER JOIN haslo ON pracownik.ID_Haslo = haslo.ID " +
+    "WHERE haslo.Email = ? AND haslo.Haslo = ?";
+
+    const sqlSelectUser = "SELECT klient.ID, osoba.Imie, haslo.Email, haslo.Haslo FROM klient"+
+    " INNER JOIN osoba ON klient.ID_osoba = osoba.ID " +
+    " INNER JOIN haslo ON klient.ID_Haslo = haslo.ID " +
+    "WHERE haslo.Email = ? AND haslo.Haslo = ?";
+
+    //Check if employee exists
+    db.query(sqlSelectEmployee, [email_, password_],(err, result)=>{
         if (err) throw err;
         if (result.length > 0){
-            console.log("Succesfully logged the user: " + email_)
+            console.log("Succesfully logged the employee: " + email_)
            
-            res.send({ ID: result[0].ID, Nazwa: result[0].Imie })
-        }
-        else{
-            console.log("User has not been logged in: " + email_)
-            res.send(false)
-        }
+            res.send({ ID: result[0].ID, Nazwa: result[0].Imie, isEmployee: true })
             
-    }) 
-     /*
-    //start change //Error on POOL_CLOSED. Try to drain the pool first
+        } 
+        else{
+            db.query(sqlSelectUser, [email_, password_],(err, result)=>{
+                if (err) throw err;
+                if (result.length > 0){
+                    console.log("Succesfully logged the client: " + email_)
+                   
+                    res.send({ ID: result[0].ID, Nazwa: result[0].Imie, isEmployee: false })
+                }
+                else{
+                    console.log("User has not been logged in: " + email_)
+                    res.send(false)
+                }
+                    
+            })
+        }
+    })
     
-    console.log("Before closure");
-    db.end((err) => {
-        if (err) throw err;
-        console.log("Closed existing connection"); //<- this log doesnt go through
-    });
-    console.log("After closure"); //this log does
+    //Check if client exists
 
-    db = mysql.createPool({
-        connectionLimit: 10,
-        port: "3306",
-        host: "localhost",
-        user: "klient",
-        password: "password",
-        database: "official_gry"
-    });
-    console.log("i did it");
-    //end change
-    */
+
 
 });
 
 //get list of games
 app.get("/api/games", (req, res) =>{
-    const sqlSelect = 'SELECT gra.ID, gra.Nazwa_gry, gatunek.Nazwa AS "Gatunek", wydawnictwo.Nazwa AS "Wydawnictwo", gra.sciezka_okladki AS "PATH" FROM gra ' +
+    const sqlSelect = 'SELECT gra.ID, gra.Nazwa_gry, gatunek.Nazwa AS "Gatunek", wydawnictwo.Nazwa AS "Wydawnictwo", gra.sciezka_okladki AS "Path" FROM gra ' +
                     'LEFT JOIN gatunek ON gra.ID_gatunek = gatunek.ID ' +
                     'LEFT JOIN wydawnictwo ON gra.ID_wydawnictwo = wydawnictwo.ID'
 
