@@ -8,9 +8,9 @@ const db = mysql.createPool({
     connectionLimit: 10,
     port: "3306",
     host: "localhost",
-    user: "admin_gry",
-    password: "password",
-    database: "official_gry"
+    user: "root",
+    password: "",
+    database: "sklep_z_grami"
 })
 
 app.use(cors());
@@ -65,7 +65,7 @@ app.post("/api/login", (req, res) => {
 
 //get list of games
 app.get("/api/games", (req, res) =>{
-    const sqlSelect = 'SELECT gra.ID, gra.Nazwa_gry, gatunek.Nazwa AS "Gatunek", wydawnictwo.Nazwa AS "Wydawnictwo" FROM gra ' +
+    const sqlSelect = 'SELECT gra.ID, gra.Nazwa_gry, gatunek.Nazwa AS "Gatunek", wydawnictwo.Nazwa AS "Wydawnictwo", gra.sciezka_okladki AS "PATH" FROM gra ' +
                     'LEFT JOIN gatunek ON gra.ID_gatunek = gatunek.ID ' +
                     'LEFT JOIN wydawnictwo ON gra.ID_wydawnictwo = wydawnictwo.ID'
 
