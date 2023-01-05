@@ -3,3 +3,16 @@
     flex-flow: row wrap;
     justify-content: space-evenly;
 }
+
+.page
+{
+    margin-left: 13rem;
+    margin-right: 13rem;
+    background: transparent;
+}
+
+.whole
+{
+    background: rgb(90,14,136);
+    background: linear-gradient(90deg, rgba(90,14,136,1) 0%, rgba(43,43,43,1) 20%, rgba(45,41,47,1) 81%, rgba(90,14,136,1) 100%);
+}

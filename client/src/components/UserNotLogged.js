@@ -9,11 +9,11 @@ function UserLogged() {
 
   return (
     <ul>
-        <li className="hover-animation" onClick={() => { setIsOpen(true)} }>Sign in</li>
+        <li className="hover-animation" onClick={() => { setIsOpen(true)} }><p>Sign in</p></li>
         <Modal open={isOpen} onClose={() => setIsOpen(false)}>
           <Login/>
         </Modal>
-        <li className="hover-animation"><Link to="/register">Register</Link></li>
+        <li className="hover-animation"><Link to="/register"><p>Register</p></Link></li>
     </ul>   
   );
 }
