@@ -9,6 +9,7 @@ function Home() {
 
   const { gameData, SetGameData } = useContext(DataContext);
   const [selectRequest, SetSelectRequest] = useState(true);
+  let keys = {}
   
   useEffect(() => {
     
@@ -16,7 +17,6 @@ function Home() {
     SetSelectRequest(true);
     // eslint-disable-next-line
   }, []);
-
   useEffect(() => {
     const source = Axios.CancelToken.source();
   
@@ -42,6 +42,7 @@ function Home() {
     // eslint-disable-next-line
   }, []);
   
+  keys = Object.keys(gameData)
   return (
     <div className='whole'>
     <div className='page'>
@@ -53,8 +54,9 @@ function Home() {
           <h3>Loading...</h3>) : 
         (
           <div className="products-box">
-          
-            {gameData.map((element) => <Product data={element} key={element.ID} />)}
+            {
+              keys.map(key => <Product data={gameData[key]} key={key}/>)
+            }
           </div>
         )
       )}
