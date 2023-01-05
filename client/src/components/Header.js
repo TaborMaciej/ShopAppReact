@@ -1,23 +1,31 @@
-import React, {useContext} from "react";
+import React, {useContext, useState} from "react";
 import {Link} from "react-router-dom";
 import CartIMG from "../imgs/cart-img.svg";
 import GlassIMG from "../imgs/glass-img.svg";
-import { userDataContext } from "../App.js"
+import { DataContext } from "../App.js"
 import "../css/Header.css"
 import UserLogged from "./UserLogged";
 import UserNotLogged from "./UserNotLogged";
 
+
+
+
 function Header(){
-    // eslint-disable-next-line
-    const {userData, setUserData} = useContext(userDataContext);
+    
+    const { userData, gameData, SetGameData } = useContext(DataContext)
+    const [ searchInput, setSearchInput ] = useState("")
+
+    const SearchGames = () => {
+        console.log(gameData)
+    }
 
     return(
      <nav className="nav-bar">        
         <Link to="/"><img src="#" alt="Company logo" className="nav-logo"/></Link>
         <div className="right-nav">
             
-            <input className="serach-bar" type="text"/>
-            <button type="submit"><img className="nav-img"src={GlassIMG} alt="search"></img></button>
+            <input className="search-bar" type="text" name="searchInput" onChange={ (e) => setSearchInput(e.target.value) }/>
+            <button onClick={SearchGames}><img className="nav-img"src={GlassIMG} alt="search"></img></button>
 
             <Link to="/Cart"><img className="nav-im" src={CartIMG} alt="Cart"/></Link>
 

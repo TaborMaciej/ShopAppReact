@@ -1,10 +1,10 @@
 import React, {useContext, useState} from 'react';
 //import UserIMG from "../imgs/user-img.svg";
-import { userDataContext } from "../App.js"
+import { DataContext } from "../App.js"
 import Modal from './Modal.js'
 
 function UserNotLogged() {    
-    const {userData, setUserData} = useContext(userDataContext);
+    const {userData, setUserData} = useContext(DataContext);
     const [isLogoutOpen, setIsLogoutOpen] = useState(false);
     
     const Logout = () =>{

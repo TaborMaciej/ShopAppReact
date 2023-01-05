@@ -1,4 +1,4 @@
-import React, { createContext, useMemo, useState } from 'react';
+import React, { createContext, useState } from 'react';
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import Home from "./components/Home.js";
 import Login from "./components/Login.js";
@@ -6,17 +6,15 @@ import Register from "./components/Register.js";
 import Header from "./components/Header.js"
 import Cart from "./components/Cart.js"
 
-const userDataContext = createContext();
+const DataContext = createContext();
 
 function App() {
 
   const [userData, setUserData] = useState({});
-  const value = useMemo(
-    () => ({ userData, setUserData }), 
-    [userData]
-  );
+  const [gameData, SetGameData] = useState([]);
+  const value = { userData, setUserData, gameData, SetGameData }
   return (
-    <userDataContext.Provider value={value}>
+    <DataContext.Provider value={value}>
       <Router>
         <Header />
           <Routes>
@@ -26,9 +24,9 @@ function App() {
             <Route exact path="/register" element={<Register />} />
           </Routes>
       </Router>
-    </userDataContext.Provider>
+    </DataContext.Provider>
   );
 }
 
 export default App;
-export { userDataContext };
+export { DataContext };

@@ -1,16 +1,20 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
+import { DataContext } from "../App.js"
 import Axios from 'axios';
 import Product from "./SingularProduct.js"
 import "../css/Home.css"
 
 function Home() {
 
-  const [gameData, SetGameData] = useState([]);
+
+  const { gameData, SetGameData } = useContext(DataContext);
   const [selectRequest, SetSelectRequest] = useState(true);
   
   useEffect(() => {
+    
     SetGameData([]);
     SetSelectRequest(true);
+    // eslint-disable-next-line
   }, []);
 
   useEffect(() => {
@@ -35,6 +39,7 @@ function Home() {
     return () => {
       source.cancel();
     };
+    // eslint-disable-next-line
   }, []);
   
   return (
@@ -48,7 +53,6 @@ function Home() {
         (
           <div className="products-box">
             {gameData.map((element) => <Product data={element} key={element.ID} />)}
-            {console.log(gameData)}
           </div>
         )
       )}

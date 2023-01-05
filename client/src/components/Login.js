@@ -1,13 +1,11 @@
 import React, {useState, useContext} from 'react';
 import Axios from 'axios'
 import { useNavigate } from "react-router-dom";
-import { userDataContext } from "../App.js"
+import { DataContext } from "../App.js"
 import '../css/Login.css';
 
 function Login() {
-
-  // eslint-disable-next-line
-  const {userData, setUserData} = useContext(userDataContext);
+  const setUserData = useContext(DataContext);
   const [email_val, setEmail] = useState("");
   const [password_val, setPassword] = useState("");
   const [loginMsg, setLoginMsg] = useState("");
