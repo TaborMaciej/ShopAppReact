@@ -1,15 +1,27 @@
 .product-box{
-    border: 2px rgb(255, 255, 255) solid;
     
     width: 300px;
     margin: 5px;
     padding: 10px;
     color: aliceblue;
+    transition: all 0.3s ease-in-out 0s;
+    background-color: #131212;
+    margin-bottom: 50px;
+    margin-top: 50px;
+
     
 }
+.product-box:hover {
+    box-shadow: 0 0 11px rgb(96, 18, 117); 
+    transform:scale(1.2); 
+    transition: all 0.7s ease-in-out 0s;
+  }
+
 
 .product-img{
-    height: 400px;
+
+    height: 320px;
     width: 250px;
     object-fit: center;
+    margin-left: 10px;
 }

@@ -45,14 +45,15 @@ function Home() {
   return (
     <div className='whole'>
     <div className='page'>
-      <h1>Home page</h1>
 
       {!selectRequest ? ( <h3>Error! Could not load data.</h3> ) :
       (
+        
         gameData.length <= 0 ? (
           <h3>Loading...</h3>) : 
         (
           <div className="products-box">
+          
             {gameData.map((element) => <Product data={element} key={element.ID} />)}
           </div>
         )
