@@ -43,7 +43,8 @@ function Home() {
   }, []);
   
   return (
-    <div>
+    <div className='whole'>
+    <div className='page'>
       <h1>Home page</h1>
 
       {!selectRequest ? ( <h3>Error! Could not load data.</h3> ) :
@@ -56,6 +57,7 @@ function Home() {
           </div>
         )
       )}
+    </div>
     </div>
   );
 }

@@ -1,6 +1,8 @@
 .product-box{
-    border: 2px black solid;
+    border: 2px rgb(255, 255, 255) solid;
+    
     width: 300px;
     margin: 5px;
     padding: 10px;
+    color: aliceblue;
 }
