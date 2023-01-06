@@ -84,16 +84,18 @@ app.get("/api/games", (req, res) =>{
             if (element.ID_gra != prevKey)
             {
                 gameList[element.ID_gra] = {
+                    ID_gra: element.ID_gra,
                     Nazwa_gry: element.Nazwa_gry,
                     Gatunek: element.Gatunek,
                     Wydawnictwo: element.Wydawnictwo,
                     Path: element.Path,
-                    Platforma: {}
+                    Platformy: {}
                 }
             }
 
-            gameList[element.ID_gra]['Platforma'][element.Platforma] = {
+            gameList[element.ID_gra]['Platformy'][element.ID_produkt] = {
                 ID_produkt: element.ID_produkt,
+                Platforma: element.Platforma,
                 Cena_sprzedazy: element.Cena_sprzedazy,
                 Ilosc_sztuk: element.Ilosc_sztuk,
                 Rok_wydania: element.Rok_wydania

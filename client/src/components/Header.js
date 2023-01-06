@@ -12,8 +12,9 @@ import logo from "../imgs/LogoShopp.png";
 
 
 function Header(){
-    
+    // eslint-disable-next-line
     const { userData, gameData, SetGameData } = useContext(DataContext)
+    // eslint-disable-next-line
     const [ searchInput, setSearchInput ] = useState("")
     const[sticky, setSticky]  = useState(false);
 
@@ -32,6 +33,7 @@ function Header(){
     return(
     <>
         <Helmet>
+            {/* eslint-disable-next-line*/}
             <body style="background: linear-gradient(90deg, rgba(32,7,47,1) 0%, rgba(19,18,18,1) 10%, rgba(19,18,18,1) 90%, rgba(32,7,47,1) 100%);"/>
         </Helmet>  
         <nav className={"navbar"+ (sticky ? " sticky" : "")}>  

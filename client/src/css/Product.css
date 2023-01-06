@@ -25,3 +25,10 @@
     object-fit: center;
     margin-left: 10px;
 }
+
+
+.product-platform, .buy-button{
+    background-color: #131212;
+    color: aliceblue;
+    margin: 2px;
+}

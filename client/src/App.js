@@ -8,10 +8,27 @@ import Cart from "./components/Cart.js"
 
 const DataContext = createContext();
 
+let CartAdd
+
 function App() {
+  // eslint-disable-next-line
+  const [cartState, setCartState] = useState([]);
+  CartAdd = (gameID, productID, amount) => {
+
+      for (let i = 0; i < cartState.length; i++){
+        if (cartState[i].ProductID === productID){
+          cartState[i].Amount += amount
+          return
+        }
+      }
+      cartState.push( {GameID: gameID, ProductID: productID, Amount: amount} )
+  }
+
+
 
   const [userData, setUserData] = useState({});
   const [gameData, SetGameData] = useState([]);
+
   const value = { userData, setUserData, gameData, SetGameData }
   return (
     <DataContext.Provider value={value}>
@@ -19,7 +36,7 @@ function App() {
         <Header />
           <Routes>
             <Route exact path="/login" element={<Login />} />
-            <Route exact path="/cart" element={<Cart />} />
+            <Route exact path="/cart" element={<Cart itemState={cartState} />} />
             <Route exact path="/" element={<Home />} />
             <Route exact path="/register" element={<Register />} />
           </Routes>
@@ -30,3 +47,4 @@ function App() {
 
 export default App;
 export { DataContext };
+export { CartAdd };
