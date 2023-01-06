@@ -10,10 +10,10 @@ const DataContext = createContext();
 
 let CartAdd, CartChangeAmount
 
-const [cartState, setCartState] = useState([]);
 
 function App() {
   // eslint-disable-next-line
+  const [cartState, setCartState] = useState([]);
   CartAdd = (gameID, productID) => {
     
     for (let i = 0; i < cartState.length; i++){
@@ -24,6 +24,7 @@ function App() {
     }
     cartState.push( {GameID: gameID, ProductID: productID, Amount: 1} )
   }
+
   CartChangeAmount = (amount, productID) => {
     const newCartState = [...cartState];
     for (let i = 0; i < newCartState.length; i++){
@@ -33,7 +34,6 @@ function App() {
     }
   
     setCartState(newCartState.filter((item) => item.Amount > 0));
-  }
   }
 
 
