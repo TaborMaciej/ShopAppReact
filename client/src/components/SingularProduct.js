@@ -1,5 +1,5 @@
 import React, {useState} from 'react';
-import { CartAdd } from "../App.js"
+import { CartAdd } from "../App.js";
 import "../css/Product.css";
 
 
@@ -22,7 +22,7 @@ function SingularProduct(props) {
           }
         </div>
         <br/>
-        {choice !== -1 ? <button onClick = { () => { CartAdd(props.data.ID_gra, choice, 3)} } className="buy-button">Dodaj do koszyka: {props.data.Platformy[choice].Cena_sprzedazy}zł</button> : ""}
+        {choice !== -1 ? <button onClick = { () => { CartAdd(props.data.ID_gra, choice)} } className="buy-button">Dodaj do koszyka: {props.data.Platformy[choice].Cena_sprzedazy}zł</button> : ""}
       </div>
   );
 }

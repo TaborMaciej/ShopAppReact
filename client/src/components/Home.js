@@ -1,24 +1,33 @@
-import React, { useState, useEffect, useContext } from 'react';
+import React, { useState, useEffect, useContext } from 'react'
 import { DataContext } from "../App.js"
-import Axios from 'axios';
+import Axios from 'axios'
 import Product from "./SingularProduct.js"
 import "../css/Home.css"
-import meme from "../imgs/meme.png";
-import wyprzedaz from "../imgs/wyprzedaz.png";
+import meme from "../imgs/meme.png"
+import wyprzedaz from "../imgs/wyprzedaz.png"
+
+function GenreList(data){
+  let genres_ = {}
+  Object.keys(data).forEach(key => {
+      if(!genres_[data[key].Gatunek])
+          genres_[data[key].Gatunek] = []
+      else
+          genres_[data[key].Gatunek].push(data[key].ID_gra)
+  });
+  return genres_
+}
 
 function Home() {
-
-
-
   const { gameData, SetGameData } = useContext(DataContext);
   const [selectRequest, SetSelectRequest] = useState(true);
-  let keys = {}
+  const [slideIndex, setSlideIndex] = useState(0);
+  const [genres, SetGenres] = useState([])
+
   const slides = [
     <img id="slide1" alt="reklama" src={wyprzedaz} />,
-    <img id="slide2" alt="meme" src={meme} />,
+    <img id="slide2" alt="meme" src={meme} />
   ];
 
-  const [slideIndex, setSlideIndex] = useState(0);
 
   useEffect(() => {
     const interval = setInterval(() => {
@@ -33,9 +42,6 @@ function Home() {
     
     SetGameData([]);
     SetSelectRequest(true);
-    // eslint-disable-next-line
-  }, []);
-  useEffect(() => {
     const source = Axios.CancelToken.source();
   
     Axios
@@ -44,6 +50,7 @@ function Home() {
       })
       .then((response) => {
         SetGameData(response.data);
+        SetGenres(GenreList(gameData))
       })
       .catch((err) => {
         SetSelectRequest(false);
@@ -63,8 +70,6 @@ function Home() {
   }, []);
 
 
-  
-  keys = Object.keys(gameData)
   return (
     <div className='whole'>
     <div className='page'>
@@ -96,7 +101,7 @@ function Home() {
                   </div>
                 </div>
               </section>
-              {keys.map(key => <Product data={gameData[key]} key={key}/>) } 
+              {Object.keys(gameData).map(key => <Product data={gameData[key]} key={key}/>) } 
             </div>
 
 
