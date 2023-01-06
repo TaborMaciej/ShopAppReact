@@ -8,22 +8,33 @@ import Cart from "./components/Cart.js"
 
 const DataContext = createContext();
 
-let CartAdd
+let CartAdd, CartChangeAmount
+
+const [cartState, setCartState] = useState([]);
 
 function App() {
   // eslint-disable-next-line
-  const [cartState, setCartState] = useState([]);
-  CartAdd = (gameID, productID, amount) => {
-
-      for (let i = 0; i < cartState.length; i++){
-        if (cartState[i].ProductID === productID){
-          cartState[i].Amount += amount
-          return
-        }
+  CartAdd = (gameID, productID) => {
+    
+    for (let i = 0; i < cartState.length; i++){
+      if (cartState[i].ProductID === productID){
+        cartState[i].Amount += 1
+        return
       }
-      cartState.push( {GameID: gameID, ProductID: productID, Amount: amount} )
+    }
+    cartState.push( {GameID: gameID, ProductID: productID, Amount: 1} )
   }
-
+  CartChangeAmount = (amount, productID) => {
+    const newCartState = [...cartState];
+    for (let i = 0; i < newCartState.length; i++){
+      if (newCartState[i].ProductID === productID){
+        newCartState[i].Amount += amount
+      }
+    }
+  
+    setCartState(newCartState.filter((item) => item.Amount > 0));
+  }
+  }
 
 
   const [userData, setUserData] = useState({});
@@ -48,3 +59,4 @@ function App() {
 export default App;
 export { DataContext };
 export { CartAdd };
+export { CartChangeAmount };

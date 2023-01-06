@@ -103,7 +103,6 @@ app.get("/api/games", (req, res) =>{
             prevKey = element.ID_gra
 
         });
-        console.log(gameList)
         res.send(gameList);
     })
     
