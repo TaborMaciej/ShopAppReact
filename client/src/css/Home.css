@@ -77,18 +77,6 @@ h3
     
 }
 
-.slider-nav a {
-    width: 0.5rem;
-    height: 0.5rem;
-    border-radius: 50%;
-    background-color: rgb(66, 11, 93);
-    opacity: 0.75;
-    transition: opacity ease 250ms;
-}
-
-.slider-nav a:hover{
-    opacity: 1;
-}
 
 .slide{
     width: 100%;

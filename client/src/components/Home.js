@@ -91,12 +91,12 @@ function Home() {
                   {slides[slideIndex]}
                   </div>
                   <div className='slider-nav'>
-                    <a href="#slide1"></a>
-                    <a href="#slide2"></a>
                   </div>
                 </div>
               </section>
-              {keys.map(key => <Product data={gameData[key]} key={key}/>) } 
+              <div>
+            {keys.map(key => <Product data={gameData[key]} key={key}/>) } 
+            </div>
             </div>
 
 
