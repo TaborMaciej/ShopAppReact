@@ -81,14 +81,6 @@ function Home() {
           <h3>Loading...</h3>) : 
         (
 
-
-          /*
-          <div className="products-box">
-            {
-              keys.map(key => <Product data={gameData[key]} key={key}/>)
-            }
-          </div>
-            */
             <div>
               <section className='container'>
                 <div className='Slide-holder'>
@@ -96,12 +88,13 @@ function Home() {
                   {slides[slideIndex]}
                   </div>
                   <div className='slider-nav'>
-                    <a href="#slide1"></a>
-                    <a href="#slide2"></a>
                   </div>
                 </div>
               </section>
-              {Object.keys(gameData).map(key => <Product data={gameData[key]} key={key}/>) } 
+
+              <div>
+                {Object.keys(gameData).map(key => <Product data={gameData[key]} key={key}/>) } 
+              </div>
             </div>
 
 

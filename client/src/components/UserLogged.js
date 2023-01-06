@@ -15,13 +15,15 @@ function UserNotLogged() {
     return (
 
         <ul className="nav-bar">
-            <li className="logged-box-item">{"Witaj, " + userData.Nazwa + (userData.isEmployee ? " !!!": "")}</li>
+            <li className="hover-animatio">{"Witaj, " + userData.Nazwa + (userData.isEmployee ? " !!!": "")}</li>
             {/*<li className="logged-box-item"><img className="nav-im" src={UserIMG} alt="User"/></li>*/}
             <li className="hover-animation sign-out" onClick={() => setIsLogoutOpen(true)}> <p className='box-animation'>Sign out</p></li>
             <Modal open={isLogoutOpen} onClose={() => setIsLogoutOpen(false)}>
-                <h3>Czy na pewno chcesz sie wylogowac?</h3>
-                <button onClick={Logout}>Tak</button>
-                <button onClick={() => setIsLogoutOpen(false)}>Nie</button>
+                <h3 className='question'>Czy na pewno chcesz sie wylogowac?</h3>
+                <div className='buttons'>
+                <button className='but' onClick={Logout}>Tak</button>
+                <button className='but' onClick={() => setIsLogoutOpen(false)}>Nie</button>
+                </div>
             </Modal>
         </ul>
     );

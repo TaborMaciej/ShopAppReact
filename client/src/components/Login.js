@@ -32,12 +32,14 @@ function Login() {
 
   return (
       <div className="App">
-        <h2>Login</h2>
+        <h2 className='login'>Login</h2>
         <div className="input-box">
-          <label htmlFor="email_">E-mail</label>
-          <input id="email_" type="email" name="email_val" onChange={ (e) => setEmail(e.target.value) }></input>
-          <label htmlFor="password_">Haslo</label>
-          <input id="password_" type="password" name="password" onChange={ (e) => setPassword(e.target.value) }></input>
+        <div>
+          <input className='input_box' id="email_" type="email" name="email_val" placeholder='E-mail' onChange={ (e) => setEmail(e.target.value) }></input>
+        </div>
+        <div>
+          <input className='input_box' id="password_" type="password" placeholder='Password' name="password" onChange={ (e) => setPassword(e.target.value) }></input>
+        </div>
           <button onClick={ TryLogin } className="login-button">Login</button>
         </div>
         <p className="login-message">{loginMsg}</p>
