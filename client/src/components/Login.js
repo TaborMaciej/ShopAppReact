@@ -40,7 +40,7 @@ function Login() {
         <div>
           <input className='input_box' id="password_" type="password" placeholder='Password' name="password" onChange={ (e) => setPassword(e.target.value) }></input>
         </div>
-          <button onClick={ TryLogin } className="login-button">Login</button>
+          <button onClick={ () => {TryLogin()} } className="login-button">Login</button>
         </div>
         <p className="login-message">{loginMsg}</p>
       </div>

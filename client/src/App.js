@@ -25,21 +25,31 @@ function App() {
     cartState.push( {GameID: gameID, ProductID: productID, Amount: 1} )
   }
 
-  CartChangeAmount = (amount, productID) => {
+  
+  const [gameData, SetGameData] = useState([]);
+
+  CartChangeAmount = (amount, productID, gameID) => {
+
+
     const newCartState = [...cartState];
     for (let i = 0; i < newCartState.length; i++){
       if (newCartState[i].ProductID === productID){
+        console.log(gameData[gameID].Platformy[productID].Ilosc_sztuk)
+        console.log(newCartState[i].Amount + amount)
+        if(newCartState[i].Amount + amount > gameData[gameID].Platformy[productID].Ilosc_sztuk ){
+          console.log("PIUPIU")
+          return false
+        }
         newCartState[i].Amount += amount
       }
     }
   
     setCartState(newCartState.filter((item) => item.Amount > 0));
+    return true
   }
 
 
   const [userData, setUserData] = useState({});
-  const [gameData, SetGameData] = useState([]);
-
   const value = { userData, setUserData, gameData, SetGameData }
   return (
     <DataContext.Provider value={value}>

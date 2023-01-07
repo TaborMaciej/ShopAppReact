@@ -1,17 +1,30 @@
-import React, {useContext} from 'react'
+import React, {useContext, useState} from 'react'
 import { DataContext } from "../App.js"
 import "../css/Cart.css"
-//(gameID, productID, amount)
-const ChangeAmount = (amount, ID) =>{
+import Axios from 'axios'
+import Modal from '../components/Modal.js'
 
+const ChangeAmount = (amount, productID, gameID, callback) =>{
+  let result
   import("../App.js").then( func =>{
-      func.CartChangeAmount(amount, ID)
+      result = func.CartChangeAmount(amount, productID, gameID)
+      callback(result)
   })
+}
+
+const PlaceOrder = (products_, user_) =>{
+
+  Axios
+  .post("http://localhost:3001/api/order", {products: products_})
+  .then((response) => {
+    console.log(response)
+  })
+  .catch((err) => console.log(err));
 }
 
 function Cart(itemState) {
   const { gameData } = useContext(DataContext);
-
+  const [openModal, SetOpenModal] = useState(false)
   //If cart empty \/
   if (itemState.itemState.length <= 0)
     return (
@@ -19,7 +32,8 @@ function Cart(itemState) {
         <h1>EMPTY!!!</h1>
       </div>
     )
-
+  console.log(gameData)
+  console.log(itemState.itemState)
 
   //If cart not empty \/
   return (
@@ -34,14 +48,20 @@ function Cart(itemState) {
           <p>{ gameData[GameID].Nazwa_gry}</p>
           <p>{ gameData[GameID].Platformy[ProductID].Platforma}</p>
           <p>{ gameData[GameID].Platformy[ProductID].Cena_sprzedazy}</p>
-          <button onClick={() => {ChangeAmount(-1, ProductID)}}>-</button>
-          <p>{ Amount }</p>
-          <button onClick={() => {ChangeAmount(1, ProductID)}}>+</button>
-          <button onClick={() => {ChangeAmount(Amount * -1, ProductID)}}>Delete</button>
+          <button onClick={() => {ChangeAmount(-1, ProductID, GameID)}}>-</button>
+          <p>{ "Ilosc sztuk: " + Amount }</p>
+          <button onClick={() => {ChangeAmount(1, ProductID, GameID, result => { SetOpenModal(!result) })
+          }}>+</button>
+          <button onClick={() => {ChangeAmount(Amount * -1, ProductID, GameID)}}>Delete</button>
         </li>
         )
-        })}
+      })}
       </ul>
+      <button onClick={() => {PlaceOrder(itemState.itemState, 3)}}>Zamow produkty</button>
+      <Modal open={openModal} onClose={() => { SetOpenModal(false) }}>
+        <p>Osiagnieto maksymalna ilosc sztuk tego produktu</p>
+      </Modal>
+
     </div>
   );
 }
