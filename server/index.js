@@ -42,7 +42,9 @@ app.post("/api/login", (req, res) => {
             res.send({ ID: result[0].ID, Nazwa: result[0].Imie, isEmployee: true })
             
         } 
-        else{
+        else{    
+            //Check if client exists
+        
             db.query(sqlSelectUser, [email_, password_],(err, result)=>{
                 if (err) throw err;
                 if (result.length > 0){
@@ -58,9 +60,6 @@ app.post("/api/login", (req, res) => {
             })
         }
     })
-    
-    //Check if client exists
-
 
 
 });
@@ -73,6 +72,7 @@ app.get("/api/games", (req, res) =>{
     'INNER JOIN system ON produkt.ID_system = system.ID ' +
     'LEFT JOIN gatunek ON gra.ID_gatunek = gatunek.ID ' +
     'LEFT JOIN wydawnictwo ON gra.ID_wydawnictwo = wydawnictwo.ID ' +
+    'WHERE produkt.Ilosc_sztuk > 0 ' +
     'ORDER BY gra.Nazwa_gry;'
 
     db.query(sqlSelect, (err, result) =>{
@@ -106,6 +106,29 @@ app.get("/api/games", (req, res) =>{
         res.send(gameList);
     })
     
+});
+
+app.post("/api/order", (req, res) =>{
+    const data = req.body.products
+    if (data.length <= 0)
+        res.send(false)
+    let whereClause = ""
+
+    for (let i = 0; i < data.length ; i++){
+        whereClause += "(" + "produkt.ID = " + data[i].ProductID + " AND produkt.Ilosc_sztuk >= " + data[i].Amount + ")" 
+        if (i + 1 !== data.length)
+            whereClause += " OR "
+    }
+
+    const sqlSelectGames = "SELECT produkt.ID, produkt.Ilosc_sztuk FROM produkt WHERE " + whereClause + ";"
+    console.log(sqlSelectGames)
+    
+    db.query(sqlSelectGames, (err, result)=>{
+        if (err) throw err;
+        if (result.length != data.length)
+            res.send(false)
+
+    })
 });
 
 app.listen(3001, () =>{
