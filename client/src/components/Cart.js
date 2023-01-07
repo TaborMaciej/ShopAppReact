@@ -28,16 +28,18 @@ function Cart(itemState) {
       {Object.keys(itemState.itemState).map(key => {
         const { GameID, ProductID, Amount } = itemState.itemState[key];
         return (
-        <li key={key}>
+        <li className='list' key={key}>
           
           <img src={ require("../imgs/okladki_gier/" + gameData[GameID].Path) } alt={"Zdjecie gry: " + gameData[GameID].Nazwa_gry} className="cart-img"/>
-          <p>{ gameData[GameID].Nazwa_gry}</p>
-          <p>{ gameData[GameID].Platformy[ProductID].Platforma}</p>
-          <p>{ gameData[GameID].Platformy[ProductID].Cena_sprzedazy}</p>
-          <button onClick={() => {ChangeAmount(-1, ProductID)}}>-</button>
-          <p>{ Amount }</p>
-          <button onClick={() => {ChangeAmount(1, ProductID)}}>+</button>
-          <button onClick={() => {ChangeAmount(Amount * -1, ProductID)}}>Delete</button>
+
+          <span className='title'>{ gameData[GameID].Nazwa_gry}</span>
+          
+          <p className='inf'>Platforma: { gameData[GameID].Platformy[ProductID].Platforma}</p>
+          <p className='inf'> { gameData[GameID].Platformy[ProductID].Cena_sprzedazy} zł</p>
+          <button className='change_amountt' onClick={() => {ChangeAmount(-1, ProductID)}}>-</button>
+          <span className='amount'>{ Amount }</span>
+          <button className='change_amount' onClick={() => {ChangeAmount(1, ProductID)}}>+</button>
+          <button className='change_amount' onClick={() => {ChangeAmount(Amount * -1, ProductID)}}>Delete</button>
         </li>
         )
         })}
