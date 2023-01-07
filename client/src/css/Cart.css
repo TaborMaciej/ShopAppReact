@@ -1,10 +1,90 @@
 .cart-img{
-    height:50px;
-    width: 50px;
+    height:5rem;
+    position: flex;
+    width: 4rem;
+    border-radius: 15px;
+
 }
 
 .list-cart{
-    color: aliceblue;
+    color: white;
+    list-style: none;
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+    margin-left: 10rem;
+    margin-right: 10rem;
+    
+
+
+
+}
+
+
+.list{
+    display: flex;
+    margin-bottom: 2rem;
+    justify-content: space-between;
+    flex-direction: row;
+    align-items: center;
+}
+
+.inf{
+    text-align: center;
+}
+
+.title{
+    text-align: center;
+
+
+
+}
+
+.change_amountt
+{
+    text-align: center;
+    background-color: rgba(22, 22, 22, 0.744);
+    border: none;
+    color: white;
+    border-radius: 25px;
+    height: 3rem;
+    width: 6rem;    
+    box-shadow: 10rem;
+    transition: all 0.3s ease 0s;
+    cursor: pointer;
+    outline: none;
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+}
+
+.change_amount{
+    text-align: center;
+    background-color: rgba(22, 22, 22, 0.744);
+    border: none;
+    color: white;
+    border-radius: 25px;
+    height: 3rem;
+    width: 6rem;    
+    box-shadow: 10rem;
+    transition: all 0.3s ease 0s;
+    cursor: pointer;
+    outline: none;
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+}
+
+.change_amount:hover{
+    background-color: rgb(95, 40, 122);
+    box-shadow: 0px 15px 20px rgb(66, 11, 93);
+    color: #fff;
+    transform: translateY(-7px);
+  
+  }
+  .change_amountt:hover{
+    background-color: rgb(95, 40, 122);
+    box-shadow: 0px 15px 20px rgb(66, 11, 93);
+    color: #fff;
+    transform: translateY(-7px);
+  
+  }
+
+  .amount{
 
 
 }
