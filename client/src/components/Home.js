@@ -22,6 +22,9 @@ function Home() {
   const [selectRequest, SetSelectRequest] = useState(true);
   const [slideIndex, setSlideIndex] = useState(0);
   const [genres, SetGenres] = useState([])
+  const akcja = "Gra akcji"
+  const fantastyka = "Fantasy"
+  const przygodowa = "Przygodowa"
 
   const slides = [
     <img id="slide1" alt="reklama" src={wyprzedaz} />,
@@ -93,7 +96,23 @@ function Home() {
               </section>
 
               <div>
-                {Object.keys(gameData).map(key => <Product data={gameData[key]} key={key}/>) } 
+             
+              <div className='Big_three'>
+              {Object.keys(gameData).slice(0, 3).map(key => <Product data={gameData[key]} key={key}/>) }
+              </div>
+              <label>Gry Akcji</label>
+              <div className='lol'>
+              {Object.keys(gameData).filter(key => gameData[key].Gatunek === akcja).slice(0, 5).map(key => <Product data={gameData[key]} key={key}/>)}
+              </div>
+              <label>Gry Fantasy</label>
+              <div className='lol'>
+              {Object.keys(gameData).filter(key => gameData[key].Gatunek === fantastyka).slice(0, 5).map(key => <Product data={gameData[key]} key={key}/>)}
+              </div>
+              <label>Gry Przygodowe</label>
+              <div className='lol'>
+              {Object.keys(gameData).filter(key => gameData[key].Gatunek === przygodowa).map(key => <Product data={gameData[key]} key={key}/>)}
+
+              </div>
               </div>
             </div>
 

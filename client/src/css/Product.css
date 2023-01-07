@@ -3,9 +3,12 @@
     width: 300px;
     margin: 5px;
     padding: 10px;
+    border-radius: 25px;
+    height: 40rem;
     color: aliceblue;
     transition: all 0.3s ease-in-out 0s;
     background-color: #131212;
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
     margin-bottom: 50px;
     margin-top: 50px;
 
@@ -14,21 +17,71 @@
 .product-box:hover {
     box-shadow: 0 0 11px rgb(96, 18, 117); 
     transform:scale(1.2); 
-    transition: all 0.7s ease-in-out 0s;
+    transition: all 0.1s ease-in-out 0s;
   }
 
 
 .product-img{
 
     height: 320px;
+    top: 0;
     width: 250px;
+    border-radius: 25px;
     object-fit: center;
     margin-left: 10px;
 }
 
 
-.product-platform, .buy-button{
-    background-color: #131212;
-    color: aliceblue;
-    margin: 2px;
+.product-platform{
+
+    background-color: rgba(22, 22, 22, 0.744);
+    border: none;
+    color: white;
+    border-radius: 25px;
+    height: 100%;
+    width: 100%;    
+    box-shadow: 10rem;
+    transition: all 0.3s ease 0s;
+    cursor: pointer;
+    outline: none;
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+    font-size: 1rem;
 }
+
+.product-platform:hover{
+    background-color: rgb(95, 40, 122);
+    box-shadow: 0px 15px 20px rgb(66, 11, 93);
+    color: #fff;
+    transform: translateY(-7px);
+  
+  }
+
+  .product-platform:focus{
+    background-color: rgb(95, 40, 122);
+    color: #fff;
+  
+  }
+
+  .buy-button{
+    background-color: rgba(22, 22, 22, 0.744);
+    border: none;
+    color: white;
+    border-radius: 25px;
+    height: 25px;
+    width: 100%;    
+    box-shadow: 10rem;
+    transition: all 0.3s ease 0s;
+    cursor: pointer;
+    outline: none;
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+    font-size: 1rem;
+    position: absolute;
+    bottom: 0;
+    margin-bottom: 1rem;
+  }
+  .buy-button:hover{
+    background-color: rgb(95, 40, 122);
+    box-shadow: 0px 15px 20px rgb(66, 11, 93);
+    color: #fff;
+    transform: translateY(-7px);
+  }
