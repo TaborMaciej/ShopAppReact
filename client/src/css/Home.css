@@ -93,6 +93,11 @@ h3
 
 }
 
+.Big_three img{
+    height: 15rem;
+    width: 18rem;
+}
+
 
 
 
@@ -107,22 +112,28 @@ h3
 }
 
 .lol img{
-    height: 10rem;
+    height: 11rem;
     width: 10rem;
     border-radius: 10px;
-    margin-left: 7rem;
-
 }
 
 .lol{
     display: flex;
     flex-flow: row wrap;    
-    justify-content: space-evenly;
+    justify-content: flex-start;
+    gap: .01rem 9rem;
+    /*
+    row-gap: .1rem;
+    column-gap: 8rem;
+    */ 
+    padding-left: 7rem; 
+
+ 
 }
 
 .lol .product-box{
     height: 26rem;
-    width: 24rem;
+    width: 12rem;
     margin-left: -5rem;
 }
 
@@ -130,10 +141,6 @@ h3
     box-shadow: 0 0 11px rgb(96, 18, 117); 
     transform:scale(1.02); 
     transition: all 0.1s ease-in-out 0s;
-}
-
-.lol h3{
-    margin-left: 7rem;
 }
 
 
@@ -147,3 +154,21 @@ label{
     font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
 
 }
+
+.title:before, .title:after {
+    content: "";
+    flex: 1 1;
+    border-bottom: 2px solid rgb(96, 18, 117);
+    margin: auto;
+}
+.title{
+    color: white;
+    font-size: 1.5rem;
+      display: flex;
+    align-items: center;
+    box-shadow: 0 0 11px rgb(96, 18, 117); 
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+
+}
+
+
