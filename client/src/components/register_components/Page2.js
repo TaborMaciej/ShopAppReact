@@ -2,8 +2,9 @@ import React from 'react'
 
 export default function Page2({registerData, setRegisterData}) {
     return (
-        <div>
+        <div className='login'>
             <input
+                className='input_b'
                 placeholder='Ulica'
                 required
                 type='text'
@@ -11,6 +12,7 @@ export default function Page2({registerData, setRegisterData}) {
             />
 
             <input
+                className='input_b'
                 placeholder='Kod pocztowy'
                 required
                 type='text'
@@ -20,6 +22,7 @@ export default function Page2({registerData, setRegisterData}) {
             />
             
             <input
+                className='input_b'
                 placeholder='Nr domu'
                 required 
                 type='text'
@@ -29,6 +32,7 @@ export default function Page2({registerData, setRegisterData}) {
             />
             
             <input
+                className='input_b'
                 placeholder='Nr mieszkania'
                 type='text'
                 pattern='[0-9 ]*'
@@ -37,6 +41,7 @@ export default function Page2({registerData, setRegisterData}) {
             />
             
             <input
+                className='input_b'
                 placeholder='Miasto'
                 required
                 type='text'

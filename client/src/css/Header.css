@@ -6,7 +6,10 @@ body{
     margin: 0;
 }
 
-
+.bo{
+    height: 100%;
+    width: 100%;
+}
 
 
 
@@ -16,8 +19,9 @@ body{
     opacity: 90%;
     color: white;
     display: flex;
-    position: relative;
+    position: flex;
     height: 90px;
+    width: 100%;
     justify-content: space-between;
     align-items: center;
     gap: 1rem;
@@ -38,24 +42,6 @@ body{
  
 }
 
-li p::before
-{
-    position: absolute;
-    content: "";
-    width: 100%;
-    height: 100%;
-    bottom: 0;
-    left: 0;
-    background-color: rgb(53, 55, 73);
-    z-index: -1;
-    transform: scale(0);
-    transition: transform 0.5s ease-in-out;
-}
-
-li p:hover::before,
-li p:focus::before{
-    transform: scale(1);
-}
 
 .hover-animation ul{
 
@@ -105,6 +91,8 @@ li p:focus::before{
 }
 
 .right-nav{
+display: relative;
+z-index: 2;
 padding: 1rem;
 margin: 0;
 display: flex;
@@ -205,6 +193,7 @@ input:focus{
 {
     position: sticky!important;
     z-index: 100;
+    width: 100%;
     top: 0;
 
 

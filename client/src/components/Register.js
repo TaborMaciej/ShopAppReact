@@ -1,4 +1,5 @@
 import Axios from 'axios';
+
 import React, {useState} from 'react';
 import { useNavigate } from "react-router-dom";
 import '../css/Register.css'
@@ -99,23 +100,23 @@ function Register() {
   const refresh = () => window.location.reload(true)
   return (
     <div className="App">
-      <h1>Rejestracja</h1>
+      <h1 className='title_R'>Rejestracja</h1>
 
       <form className='register-form' onSubmit={(event) => {HandleSubmit(event)}}>
         {pages[pageIndex]}
-        {pageIndex !== 0 && <button type="button" onClick={ () => {PrevPage()}}>Poprzedni</button>}
-        <button type="submit">{pageIndex !== pages.length - 1? "Następny" : "Zarejestruj się"}</button>
+        {pageIndex !== 0 && <button className='login-button' type="button" onClick={ () => {PrevPage()}}>Poprzedni</button>}
+        <button className='login-button' type="submit">{pageIndex !== pages.length - 1? "Następny" : "Zarejestruj się"}</button>
       </form>
       <Modal open={openUserExists} onClose={() => { setUserExists(false) }}>
-        <p>Podany e-mail jest zajęty. Spróbuj się zalogować.</p>
+        <p className='par'>Podany e-mail jest zajęty. Spróbuj się zalogować.</p>
       </Modal>
 
       <Modal open={openErrorRegister} onClose={() => { setErrorRegister(false); refresh() }}>
-        <p>Wystąpił błąd podczas rejestracji!</p>
+        <p className='par'>Wystąpił błąd podczas rejestracji!</p>
       </Modal>
 
       <Modal open={openSuccesfulRegister} onClose={() => { setSuccessRegister(true); navigation("/") }}>
-        <p>Pomyślnie utworzono konto</p>
+        <p className='par'>Pomyślnie utworzono konto</p>
       </Modal>
 
     </div>

@@ -2,8 +2,9 @@ import React from 'react'
 
 export default function Page3({registerData, setRegisterData}) {
   return (
-    <div>
+    <div className='login'>
         <input
+            className='input_b'
             placeholder='Email'
             required
             type='email'
@@ -12,6 +13,7 @@ export default function Page3({registerData, setRegisterData}) {
         />
         
         <input
+            className='input_b' 
             placeholder='Haslo'
             required
             type='password'

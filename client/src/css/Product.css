@@ -21,6 +21,7 @@
     box-shadow: 0 0 11px rgb(96, 18, 117); 
     transform:scale(1.2); 
     transition: all 0.1s ease-in-out 0s;
+    z-index: 5;
   }
 
 

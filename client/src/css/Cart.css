@@ -10,12 +10,18 @@
     color: white;
     list-style: none;
     font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
-    margin-left: 10rem;
-    margin-right: 10rem;
+
     
 
 
 
+}
+
+.error{
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+    color: white;
+    text-align: center;
+    padding: 15rem 0;
 }
 
 
@@ -24,6 +30,7 @@
     margin-bottom: 2rem;
     justify-content: space-between;
     flex-direction: row;
+    padding: auto;
     align-items: center;
 }
 
@@ -33,9 +40,7 @@
 
 .title{
     text-align: center;
-
-
-
+    box-shadow: none;
 }
 
 .change_amountt
@@ -54,6 +59,41 @@
     font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
 }
 
+.order{
+
+    position: relative;
+    text-align: center;
+    background-color: rgba(22, 22, 22, 0.744);
+    border: none;
+    color: white;
+    border-radius: 25px;
+    height: 3rem;
+    width: 100%;    
+    box-shadow: 10rem;
+    transition: all 0.3s ease 0s;
+    cursor: pointer;
+    outline: none;
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+
+
+
+}
+
+.pagee{
+    margin-left: 8rem;
+    margin-right: 8rem;
+
+}
+
+
+.order:hover{
+    background-color: rgb(95, 40, 122);
+    box-shadow: 0px 15px 20px rgb(66, 11, 93);
+    color: #fff;
+    transform: translateY(-7px);
+  
+  }
+
 .change_amount{
     text-align: center;
     background-color: rgba(22, 22, 22, 0.744);
@@ -66,7 +106,7 @@
     transition: all 0.3s ease 0s;
     cursor: pointer;
     outline: none;
-    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+
 }
 
 .change_amount:hover{
@@ -84,7 +124,16 @@
   
   }
 
-  .amount{
+.koszyk{
+    color: #fff;
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+    text-align: center;
+    padding: .1rem 0;
+}
 
+.warning{
+    color:#fff;
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+    text-align: center;
 
 }
