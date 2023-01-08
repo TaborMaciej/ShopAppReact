@@ -11,11 +11,9 @@ import search from "../imgs/WhiteSearch.png";
 
 
 
-function Header(){
+function Header({searchInput, setSearchInput}){
     // eslint-disable-next-line
     const { userData, gameData, SetGameData } = useContext(DataContext)
-    // eslint-disable-next-line
-    const [ searchInput, setSearchInput ] = useState("")
     const[sticky, setSticky]  = useState(false);
 
     useEffect(()=>{
@@ -26,20 +24,18 @@ function Header(){
         return () => window.removeEventListener('scroll', handleScroll)
     });
 
-    const SearchGames = () => {
-        console.log(gameData)
-    }
     return(
     <>
         <Helmet>
             {/* eslint-disable-next-line*/}
             <body style="background: linear-gradient(90deg, rgba(32,7,47,1) 0%, rgba(19,18,18,1) 10%, rgba(19,18,18,1) 90%, rgba(32,7,47,1) 100%);"/>
         </Helmet>  
+
         <nav className={"navbar"+ (sticky ? " sticky" : "")}>  
             <Link to="/"><img src={logo} alt="Company logo" className="nav-logo"/></Link>
             <div className="right-nav">
-                <input className="search-bar" type="text" name="searchInput" onChange={ (e) => setSearchInput(e.target.value) }/>
-                <button onClick={SearchGames}><img className="nav-img"src={search} alt="search"></img></button>
+                <input className="search-bar" type="text" name="searchInput" value={searchInput} onChange={ (e) => setSearchInput(e.target.value) }/>
+                <button><img className="nav-img"src={search} alt="search"></img></button>
                     
 
                 <Link to="/Cart"><img className="nav-im" src={CartIMG} alt="Cart"/></Link>

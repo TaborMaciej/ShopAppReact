@@ -6,23 +6,12 @@ import "../css/Home.css"
 import meme from "../imgs/meme.png"
 import wyprzedaz from "../imgs/wyprzedaz.png"
 
-function GenreList(data){
-  let genres_ = {}
-  Object.keys(data).forEach(key => {
-      if(!genres_[data[key].Gatunek])
-          genres_[data[key].Gatunek] = []
-      else
-          genres_[data[key].Gatunek].push(data[key].ID_gra)
-  });
-  return genres_
-}
 
-function Home() {
+function Home({searchInput}) {
   const { gameData, SetGameData } = useContext(DataContext);
   const [selectRequest, SetSelectRequest] = useState(true);
   const [slideIndex, setSlideIndex] = useState(0);
-  const [genres, SetGenres] = useState([])
-
+  
 
   const slides = [
     <img id="slide1" alt="reklama" src={wyprzedaz} />,
@@ -51,7 +40,6 @@ function Home() {
       })
       .then((response) => {
         SetGameData(response.data);
-        SetGenres(GenreList(gameData))
       })
       .catch((err) => {
         SetSelectRequest(false);
@@ -70,73 +58,98 @@ function Home() {
     // eslint-disable-next-line
   }, []);
 
+  const getFilteredItems = () => {
+      const filteredItems = ( Object.values(gameData).filter(product => {
+        
+      return product.Gatunek.toLowerCase().includes(searchInput.toLowerCase()) 
+          || product.Nazwa_gry.toLowerCase().includes(searchInput.toLowerCase())
+          || ( (Object.values(product.Platformy).filter(platforma =>{
+                return platforma.Platforma.toLowerCase().includes(searchInput.toLowerCase())
+              })).length !== 0)
+        }) 
+      )
 
+      return filteredItems
+  }
+  
+  
   return (
     <div className='whole'>
-    <div className='page'>
-
+      <div className='page'>
       {!selectRequest ? ( <h3>Error! Could not load data.</h3> ) :
-      (
-        
+        (
         gameData.length <= 0 ? (
           <h3>Loading...</h3>) : 
-        (
-
+          (
             <div>
-              <section className='container'>
-                <div className='Slide-holder'>
-                  <div className='slider'>
-                  {slides[slideIndex]}
+              {(searchInput !== "" ? 
+                (
+                  <div className='lol'>
+                    {getFilteredItems().map((item, key) => <Product data={item} key={key}/>) }
                   </div>
-                  <div className='slider-nav'>
-                  </div>
-                </div>
-              </section>
+                )
+                : 
+                (
+                  <>
+                    <section className='container'>
+                      <div className='Slide-holder'>
+                        <div className='slider'>
+                        {slides[slideIndex]}
+                        </div>
+                        <div className='slider-nav'>
+                        </div>
+                      </div>
+                    </section>
 
-              <div>
-             
-              <div className='Big_three'>
-              {Object.keys(gameData).slice(0, 3).map(key => <Product data={gameData[key]} key={key}/>) }
-              </div>
-              <h4 className='title'>Gry Akcji</h4>
-            
-              <div className='lol'>
-              {Object.keys(gameData).filter(key => gameData[key].Gatunek === "Gra akcji").slice(0, 5).map(key => <Product data={gameData[key]} key={key}/>)}
-              </div>
-              <h4 className='title'>Gry Fantasy</h4>
-              <div className='lol'>
-              {Object.keys(gameData).filter(key => gameData[key].Gatunek === "Fantasy").slice(0, 5).map(key => <Product data={gameData[key]} key={key}/>)}
-              </div>
-              <h4 className='title'>Gry Przygodowe</h4>
-              <div className='lol'>
-              {Object.keys(gameData).filter(key => gameData[key].Gatunek === "Przygodowa").map(key => <Product data={gameData[key]} key={key}/>)}
-              </div>
+                    <div>
+                  
+                      <div className='Big_three'>
+                        {Object.keys(gameData).slice(0, 3).map(key => <Product data={gameData[key]} key={key}/>) }
+                      </div>
 
-              <h4 className='title'>Bijatyka</h4>
-              <div className='lol'>
-              {Object.keys(gameData).filter(key => gameData[key].Gatunek === "Bijatyka").map(key => <Product data={gameData[key]} key={key}/>)}
-              </div>
-              <h4 className='title'>Gry Muzyczne</h4>
-              <div className='lol'>
-              {Object.keys(gameData).filter(key => gameData[key].Gatunek === "Muzyczna").map(key => <Product data={gameData[key]} key={key}/>)}
-              </div>
-              <h4 className='title'>Symulacja</h4>
-              <div className='lol'>
-              {Object.keys(gameData).filter(key => gameData[key].Gatunek === "Symulacja").map(key => <Product data={gameData[key]} key={key}/>)}
-              </div>
-              <h4 className='title'>VR</h4>
-              <div className='lol'>
-              {Object.keys(gameData).filter(key => gameData[key].Gatunek === "VR").map(key => <Product data={gameData[key]} key={key}/>)}
-              </div>
+                      <h4 className='title'>Gry Akcji</h4>
+                      <div className='lol'>
+                        {Object.keys(gameData).filter(key => gameData[key].Gatunek === "Gra akcji").map(key => <Product data={gameData[key]} key={key}/>)}
+                      </div>
 
-              
-              </div>
+                      <h4 className='title'>Gry Fantasy</h4>
+                      <div className='lol'>
+                        {Object.keys(gameData).filter(key => gameData[key].Gatunek === "Fantasy").slice(0, 5).map(key => <Product data={gameData[key]} key={key}/>)}
+                      </div>
+
+                      <h4 className='title'>Gry Przygodowe</h4>
+                      <div className='lol'>
+                        {Object.keys(gameData).filter(key => gameData[key].Gatunek === "Przygodowa").map(key => <Product data={gameData[key]} key={key}/>)}
+                      </div>
+
+                      <h4 className='title'>Bijatyka</h4>
+                      <div className='lol'>
+                        {Object.keys(gameData).filter(key => gameData[key].Gatunek === "Bijatyka").map(key => <Product data={gameData[key]} key={key}/>)}
+                      </div>
+
+                      <h4 className='title'>Gry Muzyczne</h4>
+                      <div className='lol'>
+                        {Object.keys(gameData).filter(key => gameData[key].Gatunek === "Muzyczna").map(key => <Product data={gameData[key]} key={key}/>)}
+                      </div>
+
+                      <h4 className='title'>Symulacja</h4>
+                      <div className='lol'>
+                        {Object.keys(gameData).filter(key => gameData[key].Gatunek === "Symulacja").map(key => <Product data={gameData[key]} key={key}/>)}
+                      </div>
+
+                      <h4 className='title'>VR</h4>
+                      <div className='lol'>
+                        {Object.keys(gameData).filter(key => gameData[key].Gatunek === "VR").map(key => <Product data={gameData[key]} key={key}/>)}
+                      </div>
+                    
+                    </div>
+                  </>
+                )
+              )}
             </div>
-
-
-        )
-      )}
-    </div>
+          )
+        )}
+      </div>
     </div>
   );
 }

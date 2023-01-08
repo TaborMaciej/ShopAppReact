@@ -38,6 +38,7 @@ function Cart(itemState) {
   const [openAmountTooBig, SetAmountTooBig] = useState(false)
   const [openAvailable, SetOpenAvailable] = useState(false)
   const [openError, SetOpenError] = useState(false)
+  const [openSuccess, SetOpenSuccess] = useState(false)
   //If cart empty \/
   if (itemState.itemState.length <= 0)
     return (
@@ -70,7 +71,7 @@ function Cart(itemState) {
       </ul>
       <button onClick={() => {checkAvailability(itemState.itemState, response => {
         if (!response) SetOpenAvailable(true)
-        else PlaceOrder(itemState.itemState, userData, response => {SetOpenError(!response)}) 
+        else PlaceOrder(itemState.itemState, userData, response => {SetOpenError(!response); SetOpenSuccess(response)}) 
       })}}>Zamow produkty</button>
       <Modal open={openAmountTooBig} onClose={() => { SetAmountTooBig(false) }}>
         <p>Osiągnięto maksymalną ilość sztuk tego produktu</p>
@@ -82,6 +83,10 @@ function Cart(itemState) {
 
       <Modal open={openError} onClose={() => { SetOpenError(false) }}>
         <p>Wystąpił błąd podczas składania zamówienia</p>
+      </Modal>
+
+      <Modal open={openSuccess} onClose={() => { SetOpenSuccess(false) }}>
+        <p>Zamówienie zostało złożone pomyślnie</p>
       </Modal>
 
     </div>
