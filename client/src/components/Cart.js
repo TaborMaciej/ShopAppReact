@@ -93,6 +93,7 @@ function Cart(itemState) {
         <p>Zamówienie zostało złożone pomyślnie</p>
       </Modal>
 
+      </div>
     </div>
   );
 }
