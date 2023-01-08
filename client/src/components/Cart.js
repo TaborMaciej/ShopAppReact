@@ -27,7 +27,6 @@ const PlaceOrder = (products_, user_, callback) =>{
   Axios
   .post("http://localhost:3001/api/order", {products: products_, user: user_})
   .then((response) =>{
-      console.log(response)
       callback(response.data)
   })
   .catch((err) => console.log(err))

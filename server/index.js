@@ -21,10 +21,17 @@ app.use(bodyParser.urlencoded({extended: true}));
 const login = require('./routes/login.js');
 login(app, db);
 
+//check if email already exists
+const checkEmail = require('./routes/checkEmail.js');
+checkEmail(app, db);
+
 //register user
 const register = require('./routes/register.js')
 register(app, db);
 
+//get list of voivodeships
+const voivodeships = require('./routes/voivodeships.js');
+voivodeships(app, db)
 
 //get list of games
 const games = require('./routes/games.js');

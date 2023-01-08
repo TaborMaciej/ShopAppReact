@@ -1,9 +1,13 @@
+import Axios from 'axios';
 import React, {useState} from 'react';
-import '../css/Login.css';
-
+import { useNavigate } from "react-router-dom";
+import '../css/Register.css'
+import Page1 from './register_components/Page1';
+import Page2 from './register_components/Page2';
+import Page3 from './register_components/Page3';
+import Modal from '../components/Modal.js'
 
 function Register() {
-
   const [registerData, setRegisterData] = useState(
     {
       //Personal Details
@@ -17,52 +21,102 @@ function Register() {
       Building: "",
       House: "", //Null
       City: "",
-      Voivodeship: "",
+      Voivodeship: 1,
       //Login information
       Email: "",
       Password: ""
     }
   ) 
 
-  const handleSubmit = (event) => {
-    event.preventDefault();
-    console.log(registerData)
+
+  const [ pageIndex, setPageIndex] = useState(0)
+  const pages =
+  [
+    <Page1 registerData={registerData} setRegisterData={(data) => {setRegisterData(data)}}/>,
+    <Page2 registerData={registerData} setRegisterData={(data) => {setRegisterData(data)}}/>,
+    <Page3 registerData={registerData} setRegisterData={(data) => {setRegisterData(data)}}/>
+  ]
+
+  const PrevPage = () =>{
+    if (pageIndex <= 0)
+      return
+    setPageIndex(pageIndex - 1)
   }
 
 
+
+  const checkEmail = (email, callback) =>{
+
+    Axios
+    .post("http://localhost:3001/api/checkEmail", {email: email})
+    .then((response) => {
+      callback(response.data)
+    })
+    .catch((err) => console.log(err));
+  }
+
+  const registerUser = (data, callback) =>{
+
+    Axios
+    .post("http://localhost:3001/api/register", {data: data})
+    .then((response) => {
+      callback(response.data)
+    })
+    .catch((err) => console.log(err));
+  }
+
+  const [openUserExists, setUserExists] = useState(false)
+  const [openErrorRegister, setErrorRegister] = useState(false)
+  const [openSuccesfulRegister, setSuccessRegister] = useState(false)
+
+  const HandleSubmit = (event) => {
+    event.preventDefault();
+    console.log(registerData)
+    if (pageIndex !== pages.length - 1){
+      setPageIndex(pageIndex + 1)
+      return
+    }
+
+    console.log("Submmited")
+    checkEmail(registerData.Email, result =>{
+      if (result){
+        setUserExists(true)
+        return
+      }
+      registerUser(registerData, result =>{
+        if(!result){
+          setErrorRegister(true)
+          return
+        }
+
+        else
+          setSuccessRegister(true)
+      })
+
+    })
+  }
+  const navigation = useNavigate();
+  const refresh = () => window.location.reload(true)
   return (
     <div className="App">
       <h1>Rejestracja</h1>
 
-      <form className='register-form' onSubmit={handleSubmit}>
-        <input placeholder='Imie' required type='text' onChange={e => { setRegisterData({...registerData, Name: e.target.value}) }}/>
-        
-        <input placeholder='Nazwisko' required type='text' onChange={e => { setRegisterData({...registerData, LastName: e.target.value}) }}/>
-        
-        <input placeholder='Nr telefonu' required type='text' onChange={e => { setRegisterData({...registerData, Phone: e.target.value}) }}/>
-        
-        <div className='date-form'>
-          <label>Data urodzenia</label>
-          <input required type='date' onChange={e => { setRegisterData({...registerData, Birthday: e.target.value}) }}/>
-        </div>
-        <input placeholder='Ulica' required type='text' onChange={e => { setRegisterData({...registerData, Street: e.target.value}) }}/>
-
-        <input placeholder='Kod pocztowy' required type='text' onChange={e => { setRegisterData({...registerData, Zip: e.target.value}) }}/>
-        
-        <input placeholder='Nr domu' required type='text' onChange={e => { setRegisterData({...registerData, Building: e.target.value}) }}/>
-        
-        <input placeholder='Nr mieszkania' required type='text' onChange={e => { setRegisterData({...registerData, House: e.target.value}) }}/>
-        
-        <input placeholder='Miasto' required type='text' onChange={e => { setRegisterData({...registerData, City: e.target.value}) }}/>
-        
-        <input placeholder='Wojewodztwo' required type='text' onChange={e => { setRegisterData({...registerData, Voivodeship: e.target.value}) }}/>
-        
-        <input placeholder='Email' required type='text' onChange={e => { setRegisterData({...registerData, Email: e.target.value}) }}/>
-        
-        <input placeholder='Haslo' required type='text' onChange={e => { setRegisterData({...registerData, Password: e.target.value}) }}/>
-
-        <button type="submit">Prześlij</button>
+      <form className='register-form' onSubmit={(event) => {HandleSubmit(event)}}>
+        {pages[pageIndex]}
+        {pageIndex !== 0 && <button type="button" onClick={ () => {PrevPage()}}>Poprzedni</button>}
+        <button type="submit">{pageIndex !== pages.length - 1? "Następny" : "Zarejestruj się"}</button>
       </form>
+      <Modal open={openUserExists} onClose={() => { setUserExists(false) }}>
+        <p>Podany e-mail jest zajęty. Spróbuj się zalogować.</p>
+      </Modal>
+
+      <Modal open={openErrorRegister} onClose={() => { setErrorRegister(false); refresh() }}>
+        <p>Wystąpił błąd podczas rejestracji!</p>
+      </Modal>
+
+      <Modal open={openSuccesfulRegister} onClose={() => { setSuccessRegister(true); navigation("/") }}>
+        <p>Pomyślnie utworzono konto</p>
+      </Modal>
 
     </div>
   );
