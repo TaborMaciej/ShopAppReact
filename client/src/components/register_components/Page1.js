@@ -1,17 +1,18 @@
 import React from 'react'
 
+
 export default function Page1({registerData, setRegisterData}) {
     console.log(registerData)
-  return (
-    <div>
-        <input
+  return ( 
+    <div className='login'>
+        <input className='input_b'
             placeholder='Imie'
             required type='text'
             value={registerData.Name}
             onChange={(e) => { setRegisterData({...registerData, Name: e.target.value}); console.log(e.target.value) }}
         />
         
-        <input
+        <input className='input_b'
             placeholder='Nazwisko'
             required
             type='text'
@@ -19,7 +20,7 @@ export default function Page1({registerData, setRegisterData}) {
             onChange={(e) => { setRegisterData({...registerData, LastName: e.target.value}) }}
         />
         
-        <input
+        <input className='input_b'
             placeholder='Nr telefonu'
             type='text'
             pattern="^[0-9 ]{0,9}$"
@@ -28,8 +29,9 @@ export default function Page1({registerData, setRegisterData}) {
         />
         
         <div className='date-form'>
-            <label>Data urodzenia</label>
-            <input
+            <label className='date'>Data urodzenia</label>
+            <input 
+                className='cal'
                 type='date'
                 value={registerData.Birthday}
                 onChange={e => { setRegisterData({...registerData, Birthday: e.target.value}) }}

@@ -35,7 +35,7 @@ module.exports = (app, db) => {
                 }
                 else{
                     console.log("User has not been logged in: " + email_)
-                    res.send({})
+                    res.send(false)
                     return
                 }
             })

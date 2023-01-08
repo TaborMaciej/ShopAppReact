@@ -41,18 +41,22 @@ function Cart(itemState) {
   //If cart empty \/
   if (itemState.itemState.length <= 0)
     return (
-      <div>
-        <h1>EMPTY!!!</h1>
+      <div>1
+        <h1 className='error'>Koszyk jest pusty, dodaj coś z GŁÓWNEJ STRONY! :D</h1>
       </div>
     )
   //If cart not empty \/
   return (
     <div>
+          <h1 className='koszyk'>Twój koszyk</h1>
+      <div className='pagee'>
       <ul className="list-cart">
       {Object.keys(itemState.itemState).map(key => {
         const { GameID, ProductID, Amount } = itemState.itemState[key];
         return (
         <li className='list' key={key}>
+
+
           
           <img src={ require("../imgs/okladki_gier/" + gameData[GameID].Path) } alt={"Zdjecie gry: " + gameData[GameID].Nazwa_gry} className="cart-img"/>
 
@@ -68,22 +72,22 @@ function Cart(itemState) {
         )
       })}
       </ul>
-      <button onClick={() => {checkAvailability(itemState.itemState, response => {
+      <button className='order' onClick={() => {checkAvailability(itemState.itemState, response => {
         if (!response) SetOpenAvailable(true)
         else PlaceOrder(itemState.itemState, userData, response => {SetOpenError(!response)}) 
       })}}>Zamow produkty</button>
       <Modal open={openAmountTooBig} onClose={() => { SetAmountTooBig(false) }}>
-        <p>Osiągnięto maksymalną ilość sztuk tego produktu</p>
+        <p className='warning'>Osiągnięto maksymalną ilość sztuk tego produktu</p>
       </Modal>
 
       <Modal open={openAvailable} onClose={() => { SetOpenAvailable(false) }}>
-        <p>Wybrane produkty są niedostępne</p>
+        <p className='warning' >Wybrane produkty są niedostępne</p>
       </Modal>
 
       <Modal open={openError} onClose={() => { SetOpenError(false) }}>
-        <p>Wystąpił błąd podczas składania zamówienia</p>
+        <p className='warning' >{ Object.keys(userData).length !== 0 ?  "Wystąpił błąd podczas składania zamówienia" : "Musisz być zalogowany aby złożyć zamówienie"}</p>
       </Modal>
-
+  </div>
     </div>
   );
 }

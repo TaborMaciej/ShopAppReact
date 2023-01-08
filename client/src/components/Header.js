@@ -33,7 +33,7 @@ function Header(){
     <>
         <Helmet>
             {/* eslint-disable-next-line*/}
-            <body style="background: linear-gradient(90deg, rgba(32,7,47,1) 0%, rgba(19,18,18,1) 10%, rgba(19,18,18,1) 90%, rgba(32,7,47,1) 100%);"/>
+            <body className="bo" style="background: linear-gradient(90deg, rgba(32,7,47,1) 0%, rgba(19,18,18,1) 10%, rgba(19,18,18,1) 90%, rgba(32,7,47,1) 100%);"/>
         </Helmet>  
         <nav className={"navbar"+ (sticky ? " sticky" : "")}>  
             <Link to="/"><img src={logo} alt="Company logo" className="nav-logo"/></Link>

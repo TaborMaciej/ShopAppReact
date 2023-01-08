@@ -101,11 +101,11 @@ function Home() {
               <h4 className='title'>Gry Akcji</h4>
             
               <div className='lol'>
-              {Object.keys(gameData).filter(key => gameData[key].Gatunek === "Gra akcji").slice(0, 5).map(key => <Product data={gameData[key]} key={key}/>)}
+              {Object.keys(gameData).filter(key => gameData[key].Gatunek === "Gra akcji").map(key => <Product data={gameData[key]} key={key}/>)}
               </div>
               <h4 className='title'>Gry Fantasy</h4>
               <div className='lol'>
-              {Object.keys(gameData).filter(key => gameData[key].Gatunek === "Fantasy").slice(0, 5).map(key => <Product data={gameData[key]} key={key}/>)}
+              {Object.keys(gameData).filter(key => gameData[key].Gatunek === "Fantasy").map(key => <Product data={gameData[key]} key={key}/>)}
               </div>
               <h4 className='title'>Gry Przygodowe</h4>
               <div className='lol'>
