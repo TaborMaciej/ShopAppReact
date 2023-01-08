@@ -18,7 +18,6 @@ function App() {
     
     for (let i = 0; i < cartState.length; i++){
       if (cartState[i].ProductID === productID){
-        cartState[i].Amount += 1
         return
       }
     }

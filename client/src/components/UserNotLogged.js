@@ -3,10 +3,7 @@ import {Link} from "react-router-dom";
 import Modal from "./Modal.js"
 import Login from "./Login.js"
 
-function UserLogged() {
-
-  
-
+function UserNotLogged() {
   const [isOpen, setIsOpen] = useState(false);
 
   return (
@@ -20,4 +17,4 @@ function UserLogged() {
   );
 }
 
-export default UserLogged;
+export default UserNotLogged;

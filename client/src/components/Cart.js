@@ -5,26 +5,40 @@ import Axios from 'axios'
 import Modal from '../components/Modal.js'
 
 const ChangeAmount = (amount, productID, gameID, callback) =>{
-  let result
+
   import("../App.js").then( func =>{
-      result = func.CartChangeAmount(amount, productID, gameID)
+      const result = func.CartChangeAmount(amount, productID, gameID)
       callback(result)
   })
 }
 
-const PlaceOrder = (products_, user_) =>{
+const checkAvailability = (products_, callback) =>{
 
   Axios
-  .post("http://localhost:3001/api/order", {products: products_})
+  .post("http://localhost:3001/api/available", {products: products_})
   .then((response) => {
-    console.log(response)
+    callback(response.data)
   })
   .catch((err) => console.log(err));
 }
 
+const PlaceOrder = (products_, user_, callback) =>{
+
+  Axios
+  .post("http://localhost:3001/api/order", {products: products_, user: user_})
+  .then((response) =>{
+      console.log(response)
+      callback(response.data)
+  })
+  .catch((err) => console.log(err))
+}
+
+
 function Cart(itemState) {
-  const { gameData } = useContext(DataContext);
-  const [openModal, SetOpenModal] = useState(false)
+  const { gameData, userData } = useContext(DataContext);
+  const [openAmountTooBig, SetAmountTooBig] = useState(false)
+  const [openAvailable, SetOpenAvailable] = useState(false)
+  const [openError, SetOpenError] = useState(false)
   //If cart empty \/
   if (itemState.itemState.length <= 0)
     return (
@@ -32,9 +46,6 @@ function Cart(itemState) {
         <h1>EMPTY!!!</h1>
       </div>
     )
-  console.log(gameData)
-  console.log(itemState.itemState)
-
   //If cart not empty \/
   return (
     <div>
@@ -49,19 +60,29 @@ function Cart(itemState) {
           <span className='title'>{ gameData[GameID].Nazwa_gry}</span>
           
           <p className='inf'>Platforma: { gameData[GameID].Platformy[ProductID].Platforma}</p>
-          <p className='inf'> { gameData[GameID].Platformy[ProductID].Cena_sprzedazy} zł</p>
-          <button className='change_amount' onClick={() => {ChangeAmount(-1, ProductID, GameID)}}>-</button>
+          <p className='inf'> { Amount * gameData[GameID].Platformy[ProductID].Cena_sprzedazy} zł</p>
+          <button className='change_amount' onClick={() => {ChangeAmount(-1, ProductID, GameID, result => (result) )}}>-</button>
           <span className='amount'>{ "Ilosc sztuk: " + Amount }</span>
-          <button className='change_amount' onClick={() => {ChangeAmount(1, ProductID, GameID, result => { SetOpenModal(!result) })
-          }}>+</button>
-          <button className='change_amount' onClick={() => {ChangeAmount(Amount * -1, ProductID, GameID)}}>Delete</button>
+          <button className='change_amount' onClick={() => {ChangeAmount(1, ProductID, GameID, result => { SetAmountTooBig(!result) })}}>+</button>
+          <button className='change_amount' onClick={() => {ChangeAmount(Amount * -1, ProductID, GameID, result => (result))}}>Delete</button>
         </li>
         )
       })}
       </ul>
-      <button onClick={() => {PlaceOrder(itemState.itemState, 3)}}>Zamow produkty</button>
-      <Modal open={openModal} onClose={() => { SetOpenModal(false) }}>
-        <p>Osiagnieto maksymalna ilosc sztuk tego produktu</p>
+      <button onClick={() => {checkAvailability(itemState.itemState, response => {
+        if (!response) SetOpenAvailable(true)
+        else PlaceOrder(itemState.itemState, userData, response => {SetOpenError(!response)}) 
+      })}}>Zamow produkty</button>
+      <Modal open={openAmountTooBig} onClose={() => { SetAmountTooBig(false) }}>
+        <p>Osiągnięto maksymalną ilość sztuk tego produktu</p>
+      </Modal>
+
+      <Modal open={openAvailable} onClose={() => { SetOpenAvailable(false) }}>
+        <p>Wybrane produkty są niedostępne</p>
+      </Modal>
+
+      <Modal open={openError} onClose={() => { SetOpenError(false) }}>
+        <p>Wystąpił błąd podczas składania zamówienia</p>
       </Modal>
 
     </div>

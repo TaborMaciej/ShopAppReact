@@ -29,7 +29,6 @@ function Header(){
     const SearchGames = () => {
         console.log(gameData)
     }
-
     return(
     <>
         <Helmet>
@@ -45,7 +44,7 @@ function Header(){
 
                 <Link to="/Cart"><img className="nav-im" src={CartIMG} alt="Cart"/></Link>
 
-                {userData.Nazwa ? <UserLogged /> :<UserNotLogged />}
+                {Object.keys(userData).length === 0 ? <UserNotLogged /> :<UserLogged /> }
             </div>
         
         </nav>

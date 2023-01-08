@@ -1,0 +1,12 @@
+.register-form{
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap
+}
+
+
+
+.date-form{
+    display: inline;
+    
+}

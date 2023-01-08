@@ -3,10 +3,10 @@ import React, {useContext, useState} from 'react';
 import { DataContext } from "../App.js"
 import Modal from './Modal.js'
 
-function UserNotLogged() {    
+function UserLogged() {    
     const {userData, setUserData} = useContext(DataContext);
     const [isLogoutOpen, setIsLogoutOpen] = useState(false);
-    
+
     const Logout = () =>{
         setIsLogoutOpen(false)
         setUserData({});
@@ -16,7 +16,6 @@ function UserNotLogged() {
 
         <ul className="nav-bar">
             <li className="hover-animatio">{"Witaj, " + userData.Nazwa + (userData.isEmployee ? " !!!": "")}</li>
-            {/*<li className="logged-box-item"><img className="nav-im" src={UserIMG} alt="User"/></li>*/}
             <li className="hover-animation sign-out" onClick={() => setIsLogoutOpen(true)}> <p className='box-animation'>Sign out</p></li>
             <Modal open={isLogoutOpen} onClose={() => setIsLogoutOpen(false)}>
                 <h3 className='question'>Czy na pewno chcesz sie wylogowac?</h3>
@@ -29,4 +28,4 @@ function UserNotLogged() {
     );
 }
 
-export default UserNotLogged;
+export default UserLogged;

@@ -1,6 +1,5 @@
 import React, {useState, useContext} from 'react';
 import Axios from 'axios'
-import { useNavigate } from "react-router-dom";
 import { DataContext } from "../App.js"
 import '../css/Login.css';
 
@@ -10,7 +9,6 @@ function Login() {
   const [email_val, setEmail] = useState("");
   const [password_val, setPassword] = useState("");
   const [loginMsg, setLoginMsg] = useState("");
-  const navigation = useNavigate();
   const TryLogin = () => {
   
     Axios
@@ -22,7 +20,6 @@ function Login() {
         else{
           setUserData(response.data);
           setLoginMsg("");
-          navigation("/");
         }
       })
       .catch((err) => console.log(err));
