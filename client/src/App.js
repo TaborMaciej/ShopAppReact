@@ -33,12 +33,9 @@ function App() {
     const newCartState = [...cartState];
     for (let i = 0; i < newCartState.length; i++){
       if (newCartState[i].ProductID === productID){
-        console.log(gameData[gameID].Platformy[productID].Ilosc_sztuk)
-        console.log(newCartState[i].Amount + amount)
-        if(newCartState[i].Amount + amount > gameData[gameID].Platformy[productID].Ilosc_sztuk ){
-          console.log("PIUPIU")
+        if(newCartState[i].Amount + amount > gameData[gameID].Platformy[productID].Ilosc_sztuk )
           return false
-        }
+
         newCartState[i].Amount += amount
       }
     }
@@ -47,17 +44,18 @@ function App() {
     return true
   }
 
+  const [searchInput, setSearchInput] = useState("")
 
   const [userData, setUserData] = useState({});
   const value = { userData, setUserData, gameData, SetGameData }
   return (
     <DataContext.Provider value={value}>
       <Router>
-        <Header />
+        <Header searchInput={searchInput} setSearchInput= { setSearchInput }/>
           <Routes>
             <Route exact path="/login" element={<Login />} />
             <Route exact path="/cart" element={<Cart itemState={cartState} />} />
-            <Route exact path="/" element={<Home />} />
+            <Route exact path="/" element={<Home searchInput={searchInput}/>} />
             <Route exact path="/register" element={<Register />} />
           </Routes>
       </Router>

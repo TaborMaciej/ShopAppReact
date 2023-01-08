@@ -18,7 +18,8 @@ function SingularProduct(props) {
 
           {
             keys.map( (key) =>
-              <button className="product-platform" onClick={ () => {setChoice(key)}}>{props.data.Platformy[key].Platforma}</button>
+
+              <button className="product-platform" key={key} onClick={ () => {setChoice(key)}}>{props.data.Platformy[key].Platforma}</button>
             )
           }
         
