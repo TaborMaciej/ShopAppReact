@@ -95,6 +95,7 @@ function Cart(itemState) {
 
       </div>
     </div>
+    </div>
   );
 }
 

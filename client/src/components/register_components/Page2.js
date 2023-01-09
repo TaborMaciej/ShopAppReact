@@ -48,7 +48,7 @@ export default function Page2({registerData, setRegisterData}) {
                 value={registerData.City}
                 onChange={e => { setRegisterData({...registerData, City: e.target.value}) }}
             />
-            <select value={registerData.Voivodeship} onChange={e => {setRegisterData({...registerData, Voivodeship: e.target.value}) }}>
+            <select className='woj' value={registerData.Voivodeship} onChange={e => {setRegisterData({...registerData, Voivodeship: e.target.value}) }}>
                 <option key={2} value={2}>Dolnośląskie</option>
                 <option key={3} value={3}>Kujawsko-Pomorskie</option>
                 <option key={6} value={6}>Łódzkie</option>

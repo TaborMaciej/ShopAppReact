@@ -8,26 +8,8 @@ const admin = mysql.createPool({
     connectionLimit: 10,
     port: "3306",
     host: "localhost",
-    user: "admin_sklep",
-    password: "admin",
-    database: "sklep_z_grami"
-})
-
-const employee = mysql.createPool({
-    connectionLimit: 10,
-    port: "3306",
-    host: "localhost",
-    user: "pracownik_sklep'",
-    password: "pracownik",
-    database: "sklep_z_grami"
-})
-
-const client = mysql.createPool({
-    connectionLimit: 10,
-    port: "3306",
-    host: "localhost",
-    user: "klient_sklep",
-    password: "klient",
+    user: "root",
+    password: "",
     database: "sklep_z_grami"
 })
 
@@ -49,15 +31,15 @@ register(app, admin);
 
 //get list of games
 const games = require('./routes/games.js');
-games(app, client);
+games(app, admin);
 
 //check if products are available
 const available = require('./routes/available.js');
-available(app, client);
+available(app, admin);
 
 //order products
 const order = require('./routes/order.js');
-order(app, client);
+order(app, admin);
 
 //get list of user's orders
 const userOrders = require('./routes/userOrders.js');
