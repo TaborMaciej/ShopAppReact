@@ -94,6 +94,7 @@ function Cart(itemState) {
       </Modal>
 
     </div>
+    </div>
   );
 }
 
