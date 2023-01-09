@@ -141,6 +141,9 @@ export default function EmployeeOrders() {
                   )
                   }) 
                 }
+                   <Modal open={openSuccess} onClose={() => {setOpenSuccess(false)}}>
+                    <p>Zmieniono status zamówienia</p>
+                  </Modal>
               </div>
                 ))
             )
