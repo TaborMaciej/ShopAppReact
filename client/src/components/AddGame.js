@@ -25,7 +25,10 @@ export default function AddProduct() {
         ID_wydawnictwo: 1
       }
     ) 
-    const [systemData, setSystemData] = useState([])
+    const [genreData, setGenreData] = useState([])
+    const [publisherData, setPublishertData] = useState([])
+
+
 
     /*
     useEffect(() => {
@@ -66,8 +69,11 @@ export default function AddProduct() {
     return (
         <div>
           <h3 className='title'>Dodawanie gry:</h3>
+          <div className='pagee'>
           <form onSubmit={(event) => {HandleSubmit(event)}}>
+          <div className='inpu'>
             <input
+             className='input_box'
               placeholder='Nazwa_gry'
               required 
               type='text'
@@ -76,29 +82,35 @@ export default function AddProduct() {
             />
 
             <input
+             className='input_box'
               placeholder='sciezka_okladki'
               required 
               type='text'
               value={productData.sciezka_okladki}
               onChange={(e) => { setProductData({...productData, sciezka_okladki: e.target.value})}}
             />
+            </div>
 
-            <select value={productData.ID_gatunek} onChange={(e) => { setProductData({...productData, ID_gatunek: e.target.value})}}>
-              {Object.keys(gameData).map(key =>{
-                return <option key={gameData[key].ID_gatunek} value={gameData[key].ID_gatunek}>{gameData[key].ID_gatunek}</option>
+            <div className='sel'>
+
+            <select className='woj' value={genreData.ID_gatunek} onChange={(e) => { setGenreData({...genreData, ID_gatunek: e.target.value})}}>
+              {Object.keys(genreData).map(key =>{
+                return <option key={genreData[key].ID_gatunek} value={genreData[key].ID_gatunek}>{genreData[key].ID_gatunek}</option>
               })}
             </select>
 
-            <select value={productData.ID_wydawnictwo} onChange={(e) => { setProductData({...productData, ID_wydawnictwo: e.target.value})}}>
-              {Object.keys(systemData).map(key =>{
-                return <option key={systemData[key].ID_wydawnictwo} value={systemData[key].ID_wydawnictwo}>{systemData[key].ID_wydawnictwo}</option>
+            <select className='woj' value={publisherData.ID_wydawnictwo} onChange={(e) => { setPublishertData({...publisherData, ID_wydawnictwo: e.target.value})}}>
+              {Object.keys(publisherData).map(key =>{
+                return <option key={publisherData[key].ID_wydawnictwo} value={publisherData[key].ID_wydawnictwo}>{publisherData[key].ID_wydawnictwo}</option>
               })}
             </select>
-            <button type="submit">Dodaj grę</button>
+            </div>
+            <button className='add' type="submit"><p className='ins'>Dodaj grę</p></button>
           </form>
           <Modal open={openSuccess} onClose={() => {setOpenSuccess(false)}}>
             <p>Pomyślnie dodano produkt</p>
           </Modal>
+          </div>
         </div>
     )
 }
