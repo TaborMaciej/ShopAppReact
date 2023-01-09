@@ -19,12 +19,15 @@ function UserLogged() {
 
     return (
         <ul className="nav-bar">
-            <li className="hover-animatio">{"Witaj, " + userData.Nazwa + (userData.isEmployee ? " !!!": "")}</li>
+            <li className="hover-animatio">{"Witaj, " + userData.Nazwa}</li>
             <li className="hover-animation sign-out" onClick={() => setIsWorkBoxOpen(true)}> <p className='box-animation'><img src={User} alt="user" className="user_work"/></p></li>
             <Modal open={isWorkBoxOpen}  onClose={() => setIsWorkBoxOpen(false)}>
                 {userData.isEmployee ? 
                     (
+                        <>
                         <button onClick={() => {  setIsWorkBoxOpen(false);  navigation("/employee-orders")}}  className='but'>Zamówienia</button>
+                        <button onClick={() => {  setIsWorkBoxOpen(false);  navigation("/employee-add")}} className='but'>Dodawanie produktów</button>
+                        </>
                     )
                     :
                     (
