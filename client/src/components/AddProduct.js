@@ -3,6 +3,8 @@ import { DataContext } from '../App'
 import { useNavigate } from 'react-router-dom'
 import Axios from 'axios'
 import Modal from './Modal'
+import "../css/AddEmployee.css"
+
 
 export default function AddProduct() {
     const {userData, gameData} = useContext(DataContext)
@@ -59,9 +61,13 @@ export default function AddProduct() {
 
     return (
         <div>
-          <h3>Dodawanie produktu:</h3>
+          <h3 className='title'>Dodawanie produktu:</h3>
+          <div className='pagee'>
+
           <form onSubmit={(event) => {HandleSubmit(event)}}>
+          <div className='inpu'>
             <input
+              className='input_box'
               placeholder='Cena sprzedazy'
               required 
               type='text'
@@ -70,6 +76,7 @@ export default function AddProduct() {
             />
 
             <input
+              className='input_box'
               placeholder='Cena zakupu'
               required 
               type='text'
@@ -78,27 +85,33 @@ export default function AddProduct() {
             />
 
             <input
+            className='input_box'
               placeholder='Rok wydania'
               type='text'
               value={productData.Rok_wydania}
               onChange={(e) => { setProductData({...productData, Rok_wydania: e.target.value})}}
             />
-            <select value={productData.ID_gra} onChange={(e) => { setProductData({...productData, ID_gra: e.target.value})}}>
+            </div>
+            <div className='sel'>
+            <select className='woj' value={productData.ID_gra} onChange={(e) => { setProductData({...productData, ID_gra: e.target.value})}}>
               {Object.keys(gameData).map(key =>{
                 return <option key={gameData[key].ID_gra} value={gameData[key].ID_gra}>{gameData[key].Nazwa_gry}</option>
               })}
             </select>
 
-            <select value={productData.ID_system} onChange={(e) => { setProductData({...productData, ID_system: e.target.value})}}>
+            <select className='woj' value={productData.ID_system} onChange={(e) => { setProductData({...productData, ID_system: e.target.value})}}>
               {Object.keys(systemData).map(key =>{
                 return <option key={systemData[key].ID} value={systemData[key].ID}>{systemData[key].Nazwa}</option>
               })}
             </select>
-            <button type="submit">Dodaj produkt</button>
+            </div>
+            <button className='add' type="submit"><p className='ins'>Dodaj produkt</p></button>
           </form>
           <Modal open={openSuccess} onClose={() => {setOpenSuccess(false)}}>
-            <p>Pomyślnie dodano produkt</p>
+            <p className='question'>Pomyślnie dodano produkt</p>
           </Modal>
+          </div>
+
         </div>
     )
 }

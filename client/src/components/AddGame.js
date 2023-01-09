@@ -3,6 +3,8 @@ import { DataContext } from '../App'
 import { useNavigate } from 'react-router-dom'
 import Axios from 'axios'
 import Modal from './Modal'
+import "../css/AddEmployee.css"
+
 
 export default function AddProduct() {
     const {userData, gameData} = useContext(DataContext)
@@ -63,7 +65,7 @@ export default function AddProduct() {
 
     return (
         <div>
-          <h3>Dodawanie gry:</h3>
+          <h3 className='title'>Dodawanie gry:</h3>
           <form onSubmit={(event) => {HandleSubmit(event)}}>
             <input
               placeholder='Nazwa_gry'
