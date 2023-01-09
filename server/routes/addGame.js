@@ -6,8 +6,6 @@ module.exports = (app, db) => {
         const sqlSelect = `SELECT * FROM gra WHERE ID_gatunek = ${mysql.escape(data.ID_gatunek)} AND ID_wydawnictwo = ${mysql.escape(data.ID_wydawnictwo)} AND Nazwa_gry = ${mysql.escape(data.Nazwa_gry)}`
         db.query(sqlSelect, (err, result) =>{
             if (err) throw err
-            console.log(result)
-
             if (result.length > 0){
                 res.send(false)
                 return
