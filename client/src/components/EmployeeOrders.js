@@ -86,59 +86,62 @@ export default function EmployeeOrders() {
                 )
                 :
                 (
-                <div className='page-order'>
-                  <h3 className="header-order">Lista zamówień</h3>
-                  {Object.keys(orderList).map(key =>{
-                    return (
-                    
-                      <div key={key} className="whole-order">
-                          <div>
-                              <p className="order-p">ID zamówienia: {orderList[key].ID_zamowienie}</p>
-                              <p className="order-p">Data zamówienia: {(orderList[key].Data).substr(0, 10)}</p>
-                              <p className="order-p">Status zamówienia: {(orderList[key].Status)}</p>
-                          </div>
+                    <div className='page-order'>
+                <h3 className="title">Zamówienia</h3>
+                {Object.keys(orderList).map(key =>{
+                  return (
+                  
+                    <div key={key} className="whole-order">
+                    <p className="title">ID zamówienia: {orderList[key].ID_zamowienie}</p>
 
-                          <div>
-                              <p className="order-p">Województwo: {orderList[key].Wojewodztwo}</p>
-                              <p className="order-p">Miasto: {orderList[key].Data.Miasto}</p>
-                              <p className="order-p">Kod pocztowy: {(orderList[key].Kod_pocztowy)}</p>
-                              <p className="order-p">Ulica: {orderList[key].Ulica}</p>
-                              <p className="order-p">Numer_budynku: {orderList[key].Numer_budynku}</p>
-                              {orderList[key].Numer_mieszkania !== null ? <p className="order-p">Status zamówienia: {(orderList[key].Numer_mieszkania)}</p> : {}}
-                          </div>
-                          <div className='all-products'>
-                            {
-                              Object.keys(orderList[key].Produkty).map(key_ =>{
-                                return (
-                                  <div key={key_} className="products-order">
-                                      <p className="product-p-order">ID produktu: {orderList[key].Produkty[key_].ID_produkt}</p>
-                                      <p className="product-p-order">Nazwa produktu: {orderList[key].Produkty[key_].Nazwa_gry}</p>
-                                      <p className="product-p-order">System: {orderList[key].Produkty[key_].System}</p>
-                                      <p className="product-p-order">Ilość sztuk: {orderList[key].Produkty[key_].Ilosc}</p>
-                                  </div>
-                                )
-                              })
-                            }
+                        <div className='tog'>
+                            <div>
+                            <p className="order-p">Data zamówienia: {(orderList[key].Data).substr(0, 10)}</p>
+                            <p className="order-p">Status zamówienia: {(orderList[key].Status)}</p>
                             </div>
-                      <form key={key} onSubmit={(event) => HandleSubmit(event, orderList[key].ID_zamowienie)}>
-                          <select className="select-status" id="status_"  ref={selectRef}>
-                              <option value={1}>Wysłane</option>
-                              <option value={2}>W trakcie realizacji</option>
-                              <option value={3}>Przyjęte do realizacji</option>
-                          </select>
-                          <button type="submit">Zmień status</button>
-                      </form>
-                      <br/>
-                      <br/>
-                      </div>
-                    )
-                    }) 
-                  }
 
-                  <Modal open={openSuccess} onClose={() => {setOpenSuccess(false)}}>
-                    <p>Zmieniono status zamówienia</p>
-                  </Modal>
-                </div>
+                            <div>
+                            <p className="title">Adres Klienta:</p>
+                            <p className="order-p-a">Województwo: {orderList[key].Wojewodztwo}</p>
+                            <p className="order-p-a">Miasto: {orderList[key].Data.Miasto}</p>
+                            <p className="order-p-a">Kod pocztowy: {(orderList[key].Kod_pocztowy)}</p>
+                            <p className="order-p-a">Ulica: {orderList[key].Ulica}</p>
+                            <p className="order-p-a">Numer_budynku: {orderList[key].Numer_budynku}</p>
+                            {orderList[key].Numer_mieszkania !== null ? <p className="order-p-a">Numer mieszkania: {(orderList[key].Numer_mieszkania)}</p> : {}}
+                            </div>
+                          </div>
+                        <div className='all-products'>
+                          {
+                            Object.keys(orderList[key].Produkty).map(key_ =>{
+                              return (
+                                <div key={key_} className="products-order">
+                                    <p className="product-p-order">ID produktu: {orderList[key].Produkty[key_].ID_produkt}</p>
+                                    <p className="product-p-order">Nazwa produktu: {orderList[key].Produkty[key_].Nazwa_gry}</p>
+                                    <p className="product-p-order">System: {orderList[key].Produkty[key_].System}</p>
+                                    <p className="product-p-order">Ilość sztuk: {orderList[key].Produkty[key_].Ilosc}</p>
+                                </div>
+                              )
+                            })
+                          }
+                          </div>
+                    <form key={key} onSubmit={(event) => HandleSubmit(event, orderList[key].ID_zamowienie)}>
+                      <div className='sub'>
+
+                        <select className="woj" id="status_"  ref={selectRef}>
+                            <option value={1}>Wysłane</option>
+                            <option value={2}>W trakcie realizacji</option>
+                            <option value={3}>Przyjęte do realizacji</option>
+                        </select>
+                        <button className='but' type="submit">Zmień status</button>
+                      </div>
+                    </form>
+                    <br/>
+                    <br/>
+                    </div>
+                  )
+                  }) 
+                }
+              </div>
                 ))
             )
         )

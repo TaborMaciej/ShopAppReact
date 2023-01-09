@@ -57,21 +57,26 @@ function Orders() {
             :
             (
               <div className='page-order'>
-                <h3 className="header-order">Twoje zamówienia</h3>
+                <h3 className="title">Twoje zamówienia</h3>
                 {Object.keys(orderList).map(key =>{
                   return (
                   
                     <div key={key} className="whole-order">
+                    <div className='pagee'>
                       <div>
-                        <p className="order-p">ID zamówienia: {orderList[key].ID_zamowienie}</p>
+                        <p className="title">ID zamówienia: {orderList[key].ID_zamowienie}</p>
                         <p className="order-p">Data zamówienia: {(orderList[key].Data).substr(0, 10)}</p>
                         <p className="order-p">Status zamówienia: {(orderList[key].Status)}</p>
                       </div>
+
                         <div className='all-products'>
                           {
+                            
                             Object.keys(orderList[key].Produkty).map(key_ =>{
                               return (
+
                                 <div key={key_} className="products-order">
+
                                   <p className="product-p-order">{orderList[key].Produkty[key_].Nazwa_gry}</p>
                                   <p className="product-p-order">{orderList[key].Produkty[key_].System}</p>
                                   <p className="product-p-order">{(orderList[key].Produkty[key_].Cena * orderList[key].Produkty[key_].Ilosc).toFixed(2)}zł</p>
@@ -81,6 +86,7 @@ function Orders() {
                             })
                           }
                           </div>
+                    </div>      
                     </div>
                   
                   )
