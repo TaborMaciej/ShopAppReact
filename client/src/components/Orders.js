@@ -1,42 +1,96 @@
-import React, {useContext, useState} from 'react'
+import React, {useContext, useState, useEffect} from 'react'
 import { DataContext } from "../App.js"
-import "../css/Cart.css"
+import Axios from 'axios'
+import "../css/Orders.css"
 
 
 
-function Orders(itemState) {    
 
-    const { gameData, zamowienieData} = useContext(DataContext);
+function Orders() {    
+    const {userData} = useContext(DataContext)
+    const [selectRequest, SetSelectRequest] = useState(true);
+    const [orderList, SetOrdersList] = useState({})
 
-    if (itemState.itemState.length <= 0)
+    useEffect(() => {
+    
+      SetOrdersList({});
+      SetSelectRequest(true);
+      const source = Axios.CancelToken.source();
+    
+      Axios
+        .post("http://localhost:3001/api/userOrders", {userID: userData.ID},{
+          cancelToken: source.token,
+        })
+        .then((response) => {
+          SetOrdersList(response.data);
+        })
+        .catch((err) => {
+          SetSelectRequest(false);
+          if (Axios.isCancel(err)) {
+            console.log("Request canceled", err.message);
+          } else {
+            console.log(err);
+          }
+        });
+  
+  
+  
+      return () => {
+        source.cancel();
+      };
+    }, [userData.ID]);
+
     return (
-      <div>1
-        <h1 className='error'>Brak zamówień, zamów coś! :D</h1>
-      </div>
-    )
-
-    return (
-
-        <div>
-            <div className='pagee'>
-                <ul className="list-cart">
-                    {Object.keys(itemState.itemState).map(key => {
-                    const { GameID, ProductID, Amount } = itemState.itemState[key];
-            return (
-            <li className='list' key={key}>
-
-            <img src={ require("../imgs/okladki_gier/" + gameData[GameID].Path) } alt={"Zdjecie gry: " + gameData[GameID].Nazwa_gry} className="cart-img"/>
-            <span className='title'>{ gameData[GameID].Nazwa_gry}</span>
-            <p className='inf'>Platforma: { gameData[GameID].Platformy[ProductID].Platforma}</p>
-            <p className='inf'> { Amount * gameData[GameID].Platformy[ProductID].Cena_sprzedazy} zł</p>
-            <span className='amount'>{ "Ilosc sztuk: " + Amount }</span>
-      </li>
+      (!selectRequest ?
+        (
+          <div>
+            <h1 className='error'>Wystąpił błąd podczas ładowania danych</h1>
+          </div>
+        )
+        :
+        ( (Object.keys(orderList).length <= 0 ?
+            (
+              <div>
+                  <h1 className='error'>Brak zamówień, zamów coś! :D</h1>
+              </div>
+            )
+            :
+            (
+              <div className='page-order'>
+                <h3 className="header-order">Twoje zamówienia</h3>
+                {Object.keys(orderList).map(key =>{
+                  return (
+                  
+                    <div key={key} className="whole-order">
+                      <div>
+                        <p className="order-p">ID zamówienia: {orderList[key].ID_zamowienie}</p>
+                        <p className="order-p">Data zamówienia: {(orderList[key].Data).substr(0, 10)}</p>
+                        <p className="order-p">Status zamówienia: {(orderList[key].Status)}</p>
+                      </div>
+                        <div className='all-products'>
+                          {
+                            Object.keys(orderList[key].Produkty).map(key_ =>{
+                              return (
+                                <div key={key_} className="products-order">
+                                  <p className="product-p-order">{orderList[key].Produkty[key_].Nazwa_gry}</p>
+                                  <p className="product-p-order">{(orderList[key].Produkty[key_].Cena * orderList[key].Produkty[key_].Ilosc).toFixed(2)}zł</p>
+                                  <p className="product-p-order">Ilość sztuk: {orderList[key].Produkty[key_].Ilosc}</p>
+                                </div>
+                              )
+                            })
+                          }
+                          </div>
+                    </div>
+                  
+                  )
+                  }) 
+                }
+              </div>
+            )
+          )
+        )
       )
-    })}
-                 </ul>
-            </div>
-        </div>
-            );
-        }
+    );
+}
 
 export default Orders;

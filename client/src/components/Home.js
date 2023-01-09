@@ -76,10 +76,10 @@ function Home({searchInput}) {
   return (
     <div className='whole'>
       <div className='page'>
-      {!selectRequest ? ( <h3>Error! Could not load data.</h3> ) :
+      {!selectRequest ? ( <h3>Wystąpił błąd podczas ładowania danych</h3> ) :
         (
         gameData.length <= 0 ? (
-          <h3>Loading...</h3>) : 
+          <h3>Ładowanie...</h3>) : 
           (
             <div>
               {(searchInput !== "" ? 

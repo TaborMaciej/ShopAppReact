@@ -42,18 +42,20 @@ function Cart(itemState) {
   //If cart empty \/
   if (itemState.itemState.length <= 0)
     return (
-      <div>1
+      <div>
         <h1 className='error'>Koszyk jest pusty, dodaj coś z GŁÓWNEJ STRONY! :D</h1>
       </div>
     )
   //If cart not empty \/
+  let sum = 0
   return (
     <div>
-          <h1 className='koszyk'>Twój koszyk</h1>
+      <h1 className='koszyk'>Twój koszyk</h1>
       <div className='pagee'>
       <ul className="list-cart">
       {Object.keys(itemState.itemState).map(key => {
         const { GameID, ProductID, Amount } = itemState.itemState[key];
+        sum += Amount * gameData[GameID].Platformy[ProductID].Cena_sprzedazy
         return (
         <li className='list' key={key}>
 
@@ -64,7 +66,7 @@ function Cart(itemState) {
           <span className='title'>{ gameData[GameID].Nazwa_gry}</span>
           
           <p className='inf'>Platforma: { gameData[GameID].Platformy[ProductID].Platforma}</p>
-          <p className='inf'> { Amount * gameData[GameID].Platformy[ProductID].Cena_sprzedazy} zł</p>
+          <p className='inf'> {(Amount * gameData[GameID].Platformy[ProductID].Cena_sprzedazy).toFixed(2)} zł</p>
           <button className='change_amount' onClick={() => {ChangeAmount(-1, ProductID, GameID, result => (result) )}}>-</button>
           <span className='amount'>{ "Ilosc sztuk: " + Amount }</span>
           <button className='change_amount' onClick={() => {ChangeAmount(1, ProductID, GameID, result => { SetAmountTooBig(!result) })}}>+</button>
@@ -76,7 +78,7 @@ function Cart(itemState) {
       <button className='order' onClick={() => {checkAvailability(itemState.itemState, response => {
         if (!response) SetOpenAvailable(true)
         else PlaceOrder(itemState.itemState, userData, response => {SetOpenError(!response); SetOpenSuccess(response)}) 
-      })}}>Zamow produkty</button>
+      })}}>Zamow produkty: {sum.toFixed(2)}zł</button>
       <Modal open={openAmountTooBig} onClose={() => { SetAmountTooBig(false) }}>
         <p className='warning'>Osiągnięto maksymalną ilość sztuk tego produktu</p>
       </Modal>
@@ -94,7 +96,6 @@ function Cart(itemState) {
       </Modal>
 
       </div>
-    </div>
     </div>
   );
 }
