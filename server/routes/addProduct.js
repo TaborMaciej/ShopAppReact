@@ -14,7 +14,7 @@ module.exports = (app, db) => {
             const rok = (data.Rok_wydania === "" ? null : data.Rok_wydania)
             const sqlInsert = `INSERT INTO produkt (ID, Cena_sprzedazy, Cena_zakupu, Rok_wydania, Ilosc_sztuk, ID_system, ID_gra)`  +
                               ` VALUES (NULL, ${mysql.escape(data.Cena_sprzedazy)}, ${mysql.escape(data.Cena_zakupu)}, ${mysql.escape(rok)},` +
-                              `${mysql.escape(1000)}, ${mysql.escape(data.ID_system)}, ${mysql.escape(data.ID_gra)})` 
+                              `${mysql.escape(data.Ilosc_sztuk)}, ${mysql.escape(data.ID_system)}, ${mysql.escape(data.ID_gra)})` 
             db.query(sqlInsert, (err, result) =>{
                 if (err) throw err
                 res.send(true)

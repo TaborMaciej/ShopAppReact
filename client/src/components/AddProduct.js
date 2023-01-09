@@ -22,6 +22,7 @@ export default function AddProduct() {
         Cena_sprzedazy: "",
         Cena_zakupu: "",
         Rok_wydania: "",
+        Ilosc_sztuk: "",
         ID_system: 1,
         ID_gra: 1
       }
@@ -51,11 +52,14 @@ export default function AddProduct() {
     }
 
     const [openSuccess, setOpenSuccess] = useState(false)
+    const [openExists, setOpenExists] = useState(false)
 
     const HandleSubmit = (event) =>{
       event.preventDefault()
       insertProduct(result =>{
+        console.log(result)
         setOpenSuccess(result)
+        setOpenExists(!result)
     })
     }
 
@@ -91,6 +95,15 @@ export default function AddProduct() {
               value={productData.Rok_wydania}
               onChange={(e) => { setProductData({...productData, Rok_wydania: e.target.value})}}
             />
+
+            <input
+            className='input_box'
+              placeholder='Ilosc sztuk'
+              type='text'
+              value={productData.Ilosc_sztuk}
+              onChange={(e) => { setProductData({...productData, Ilosc_sztuk: e.target.value})}}
+            />
+
             </div>
             <div className='sel'>
             <select className='woj' value={productData.ID_gra} onChange={(e) => { setProductData({...productData, ID_gra: e.target.value})}}>
@@ -109,6 +122,10 @@ export default function AddProduct() {
           </form>
           <Modal open={openSuccess} onClose={() => {setOpenSuccess(false)}}>
             <p className='question'>Pomyślnie dodano produkt</p>
+          </Modal>
+
+          <Modal open={openExists} onClose={() => {setOpenExists(false)}}>
+            <p className='question'>Wystąpił błąd</p>
           </Modal>
           </div>
 
