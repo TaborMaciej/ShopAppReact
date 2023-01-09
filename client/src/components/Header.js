@@ -39,7 +39,7 @@ function Header({searchInput, setSearchInput}){
                 <button><img className="nav-img"src={search} alt="search"></img></button>
                     
 
-                <Link to="/Cart"><img className="nav-im" src={CartIMG} alt="Cart"/></Link>
+                {((userData.isEmployee === false || Object.keys(userData).length === 0 )? <Link to="/Cart"><img className="nav-im" src={CartIMG} alt="Cart"/></Link> : <></>)}
 
                 {Object.keys(userData).length === 0 ? <UserNotLogged /> :<UserLogged /> }
             </div>

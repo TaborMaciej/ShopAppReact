@@ -1,8 +1,8 @@
 const mysql = require('mysql');
 
 module.exports = (app, db) => {
-    app.get("/api/getGame", (req, res) =>{
-        const sqlSelect = `SELECT ID AS "ID_gra", Nazwa_gry FROM gra`
+    app.get("/api/genre", (req, res) =>{
+        const sqlSelect = `SELECT * FROM gatunek`
         db.query(sqlSelect, (err, result) =>{
             if (err) throw err
             console.log(result)

@@ -79,6 +79,7 @@ function Cart(itemState) {
         if (!response) SetOpenAvailable(true)
         else PlaceOrder(itemState.itemState, userData, response => {SetOpenError(!response); SetOpenSuccess(response)}) 
       })}}>Zamow produkty: {sum.toFixed(2)}zł</button>
+      
       <Modal open={openAmountTooBig} onClose={() => { SetAmountTooBig(false) }}>
         <p className='warning'>Osiągnięto maksymalną ilość sztuk tego produktu</p>
       </Modal>

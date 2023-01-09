@@ -7,9 +7,9 @@ import "../css/AddEmployee.css"
 
 
 export default function AddProduct() {
-    const {userData, gameData} = useContext(DataContext)
-    const navigation = useNavigate()
-
+  const navigation = useNavigate()
+  const {userData} = useContext(DataContext)
+  
     useEffect(() => {
       if (!userData.isEmployee || userData === {}) {
         navigation("/")
@@ -28,7 +28,7 @@ export default function AddProduct() {
       }
     ) 
     const [systemData, setSystemData] = useState([])
-
+    const [gameData, SetGameData] = useState([])
     useEffect(() => {
       Axios
         .get("http://localhost:3001/api/system")
@@ -39,6 +39,14 @@ export default function AddProduct() {
           console.log(err)
         });
 
+      Axios
+        .get("http://localhost:3001/api/get-games")
+        .then((response) => {
+            SetGameData(response.data);
+        })
+        .catch((err) => {
+          console.log(err)
+        });
       }, [])
     
     const insertProduct = (callback) =>{
@@ -106,9 +114,9 @@ export default function AddProduct() {
 
             </div>
             <div className='sel'>
-            <select className='woj' value={productData.ID_gra} onChange={(e) => { setProductData({...productData, ID_gra: e.target.value})}}>
+            <select className='woj' value={gameData.ID} onChange={(e) => { setProductData({...productData, ID_gra: e.target.value})}}>
               {Object.keys(gameData).map(key =>{
-                return <option key={gameData[key].ID_gra} value={gameData[key].ID_gra}>{gameData[key].Nazwa_gry}</option>
+                return <option key={gameData[key].ID} value={gameData[key].ID}>{gameData[key].Nazwa_gry}</option>
               })}
             </select>
 

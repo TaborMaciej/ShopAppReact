@@ -114,7 +114,7 @@ function Register() {
         <p className='par'>Wystąpił błąd podczas rejestracji!</p>
       </Modal>
 
-      <Modal open={openSuccesfulRegister} onClose={() => { setSuccessRegister(true); navigation("/") }}>
+      <Modal open={openSuccesfulRegister} onClose={() => { setSuccessRegister(false); navigation("/") }}>
         <p className='par'>Pomyślnie utworzono konto</p>
       </Modal>
 

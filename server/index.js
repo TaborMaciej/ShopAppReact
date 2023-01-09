@@ -80,14 +80,18 @@ const addProduct = require('./routes/addProduct.js');
 addProduct(app, employee)
 
 //get games
-
-const getGame = require('./routes/getGame.js');
-getGame(app, employee)
+const genre = require('./routes/genre.js');
+genre(app, employee)
 
 //get publishers
 const publisher = require('./routes/publisher.js');
 publisher(app, employee)
 
+const addGame = require('./routes/addGame.js')
+addGame(app, employee)
+
+const getGames = require('./routes/getGames.js');
+getGames(app, employee)
 app.listen(3001, () =>{
     console.log("Server running on port 3001");
 });

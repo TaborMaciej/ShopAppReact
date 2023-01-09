@@ -7,7 +7,7 @@ import "../css/AddEmployee.css"
 
 
 export default function AddProduct() {
-    const {userData, gameData} = useContext(DataContext)
+    const {userData} = useContext(DataContext)
     const navigation = useNavigate()
 
     useEffect(() => {
@@ -28,26 +28,31 @@ export default function AddProduct() {
     const [genreData, setGenreData] = useState([])
     const [publisherData, setPublishertData] = useState([])
 
-
-
-    /*
     useEffect(() => {
       Axios
-        .get("http://localhost:3001/api/system")
+        .get("http://localhost:3001/api/genre")
         .then((response) => {
-            setSystemData(response.data);
+            setGenreData(response.data);
         })
         .catch((err) => {
           console.log(err)
         });
 
+      Axios
+        .get("http://localhost:3001/api/publisher")
+        .then((response) => {
+            setPublishertData(response.data);
+        })
+        .catch((err) => {
+          console.log(err)
+        });
       }, [])
-      */
     
-    const insertProduct = (callback) =>{
+    
+    const insertGame = (callback) =>{
 
         Axios
-        .post("http://localhost:3001/api/add-product", {data: productData})
+        .post("http://localhost:3001/api/add-game", {data: productData})
         .then((response) => {
           callback(response.data)
         })
@@ -55,15 +60,16 @@ export default function AddProduct() {
     }
 
     const [openSuccess, setOpenSuccess] = useState(false)
+    const [openError, setOpenError] = useState(false)
 
     const HandleSubmit = (event) =>{
       event.preventDefault()
-      console.log(productData)
       setOpenSuccess(true)
-      /*
-      insertProduct(result =>{
-    })
-    */
+      insertGame(result =>{
+        setOpenError(!result)
+        setOpenSuccess(result)
+      })
+    
     }
 
     return (
@@ -93,22 +99,25 @@ export default function AddProduct() {
 
             <div className='sel'>
 
-            <select className='woj' value={genreData.ID_gatunek} onChange={(e) => { setGenreData({...genreData, ID_gatunek: e.target.value})}}>
+            <select className='woj' value={genreData.ID_gatunek} onChange={(e) => { setProductData({...productData, ID_gatunek: e.target.value})}}>
               {Object.keys(genreData).map(key =>{
-                return <option key={genreData[key].ID_gatunek} value={genreData[key].ID_gatunek}>{genreData[key].ID_gatunek}</option>
+                return <option key={genreData[key].ID} value={genreData[key].ID}>{genreData[key].Nazwa}</option>
               })}
             </select>
 
-            <select className='woj' value={publisherData.ID_wydawnictwo} onChange={(e) => { setPublishertData({...publisherData, ID_wydawnictwo: e.target.value})}}>
+            <select className='woj' value={publisherData.ID_wydawnictwo} onChange={(e) => { setProductData({...productData, ID_wydawnictwo: e.target.value})}}>
               {Object.keys(publisherData).map(key =>{
-                return <option key={publisherData[key].ID_wydawnictwo} value={publisherData[key].ID_wydawnictwo}>{publisherData[key].ID_wydawnictwo}</option>
+                return <option key={publisherData[key].ID_wydawnictwo} value={publisherData[key].ID_wydawnictwo}>{publisherData[key].Nazwa}</option>
               })}
             </select>
             </div>
             <button className='add' type="submit"><p className='ins'>Dodaj grę</p></button>
           </form>
           <Modal open={openSuccess} onClose={() => {setOpenSuccess(false)}}>
-            <p>Pomyślnie dodano produkt</p>
+            <p className='question'>Pomyślnie dodano produkt</p>
+          </Modal>
+          <Modal open={openError} onClose={() => {setOpenError(false)}}>
+            <p className='question'>Wystąpił błąd</p>
           </Modal>
           </div>
         </div>
