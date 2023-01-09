@@ -50,7 +50,7 @@ function Cart(itemState) {
   let sum = 0
   return (
     <div>
-      <h1 className='koszyk'>Twój koszyk</h1>
+      <h1 className='title'>Twój koszyk</h1>
       <div className='pagee'>
       <ul className="list-cart">
       {Object.keys(itemState.itemState).map(key => {

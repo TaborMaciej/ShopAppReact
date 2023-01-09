@@ -1,0 +1,69 @@
+
+.order-p{
+    color: white;
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+    font-size: 1.3rem;
+
+}
+
+.product-p-order{
+    color: white;
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+
+}
+.products-order{
+    display: flex;
+    justify-content: space-between;
+    flex-direction: row;
+}
+
+
+.order-p-a{
+    color: white;
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+text-align: right;
+font-size: 1rem;
+}
+
+.all-products{
+
+    margin-left: 10rem;
+    margin-right: 10rem;
+
+}
+
+.des{
+
+    margin-left: 10rem;
+    margin-right: 10rem;
+
+}
+.product-des{
+    color: rgb(180, 52, 244);
+    text-align: center;
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+
+}
+
+.rwo{
+    display: flex;
+    justify-content: space-between;
+    flex-direction: row;
+}
+
+.tog{
+    display: flex;
+    justify-content: space-between;
+    margin-right: 1rem;
+    margin-left: 1rem;
+}
+
+.but{
+    margin-top: 4px;
+}
+
+.sub{
+    margin-top: 1rem;
+    display: flex;
+    margin-left: 35rem;    
+}

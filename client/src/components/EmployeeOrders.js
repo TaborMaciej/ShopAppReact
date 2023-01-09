@@ -82,25 +82,29 @@ export default function EmployeeOrders() {
                 :
                 (
                     <div className='page-order'>
-                <h3 className="header-order">Twoje zamówienia</h3>
+                <h3 className="title">Zamówienia</h3>
                 {Object.keys(orderList).map(key =>{
                   return (
                   
                     <div key={key} className="whole-order">
-                        <div>
-                            <p className="order-p">ID zamówienia: {orderList[key].ID_zamowienie}</p>
+                    <p className="title">ID zamówienia: {orderList[key].ID_zamowienie}</p>
+
+                        <div className='tog'>
+                            <div>
                             <p className="order-p">Data zamówienia: {(orderList[key].Data).substr(0, 10)}</p>
                             <p className="order-p">Status zamówienia: {(orderList[key].Status)}</p>
-                        </div>
+                            </div>
 
-                        <div>
-                            <p className="order-p">Województwo: {orderList[key].Wojewodztwo}</p>
-                            <p className="order-p">Miasto: {orderList[key].Data.Miasto}</p>
-                            <p className="order-p">Kod pocztowy: {(orderList[key].Kod_pocztowy)}</p>
-                            <p className="order-p">Ulica: {orderList[key].Ulica}</p>
-                            <p className="order-p">Numer_budynku: {orderList[key].Numer_budynku}</p>
-                            {orderList[key].Numer_mieszkania !== null ? <p className="order-p">Status zamówienia: {(orderList[key].Numer_mieszkania)}</p> : {}}
-                        </div>
+                            <div>
+                            <p className="title">Adres Klienta:</p>
+                            <p className="order-p-a">Województwo: {orderList[key].Wojewodztwo}</p>
+                            <p className="order-p-a">Miasto: {orderList[key].Data.Miasto}</p>
+                            <p className="order-p-a">Kod pocztowy: {(orderList[key].Kod_pocztowy)}</p>
+                            <p className="order-p-a">Ulica: {orderList[key].Ulica}</p>
+                            <p className="order-p-a">Numer_budynku: {orderList[key].Numer_budynku}</p>
+                            {orderList[key].Numer_mieszkania !== null ? <p className="order-p-a">Numer mieszkania: {(orderList[key].Numer_mieszkania)}</p> : {}}
+                            </div>
+                          </div>
                         <div className='all-products'>
                           {
                             Object.keys(orderList[key].Produkty).map(key_ =>{
@@ -116,12 +120,15 @@ export default function EmployeeOrders() {
                           }
                           </div>
                     <form key={key} onSubmit={(event) => HandleSubmit(event)}>
-                        <select className="select-status" id="status_"  ref={selectRef}>
+                    <div className='sub'>
+
+                        <select className="woj" id="status_"  ref={selectRef}>
                             <option value={1}>Wysłane</option>
                             <option value={2}>W trakcie realizacji</option>
                             <option value={3}>Przyjęte do realizacji</option>
                         </select>
-                        <button type="submit">Zmień status</button>
+                        <button className='but' type="submit">Zmień status</button>
+                      </div>
                     </form>
                     <br/>
                     <br/>

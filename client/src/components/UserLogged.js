@@ -24,14 +24,14 @@ function UserLogged() {
             <Modal open={isWorkBoxOpen}  onClose={() => setIsWorkBoxOpen(false)}>
                 {userData.isEmployee ? 
                     (
-                        <button onClick={() => {  setIsWorkBoxOpen(false);  navigation("/employee-orders")}}  className='but'>Zamówienia</button>
+                        <button onClick={() => {  setIsWorkBoxOpen(false);  navigation("/employee-orders")}}  className='butt'><p>Zamówienia</p></button>
                     )
                     :
                     (
-                        <button onClick={() => {  setIsWorkBoxOpen(false);  navigation("/orders")}}  className='but'>Moje Zamówienia</button>
+                        <button onClick={() => {  setIsWorkBoxOpen(false);  navigation("/orders")}}  className='butt'><p>Moje Zamówienia</p></button>
                     )
                 }
-                <button onClick={() => setIsLogoutOpen(true)} className='but'>Wyloguj mnie</button>
+                <button onClick={() => setIsLogoutOpen(true)} className='butt'><p>Wyloguj mnie</p></button>
             </Modal>
             <Modal open={isLogoutOpen} onClose={() => setIsLogoutOpen(false)}>
                 <h3 className='question'>Czy na pewno chcesz sie wylogowac?</h3>
