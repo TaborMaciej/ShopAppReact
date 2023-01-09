@@ -2,22 +2,25 @@ import React, {useContext, useState, useEffect, useRef} from 'react'
 import { DataContext } from '../App'
 import { useNavigate } from 'react-router-dom'
 import Axios from 'axios'
+import Modal from './Modal'
+
 export default function EmployeeOrders() {
-    const {userData} = useContext(DataContext)
+    const {userData, gameData} = useContext(DataContext)
     const navigation = useNavigate()
 
     useEffect(() => {
         if (!userData.isEmployee || userData === {}) {
-            navigation("/")
+          navigation("/")
         }
-    }, [userData, navigation])
-    
-    
-    const [selectRequest, SetSelectRequest] = useState(true);
-    const [orderList, SetOrdersList] = useState({})
-
+      }, [userData, navigation])
+      
+      
+      const [selectRequest, SetSelectRequest] = useState(true);
+      const [orderList, SetOrdersList] = useState({})
+      const [openSuccess, setOpenSuccess] = useState(false)
+      
     useEffect(() => {
-    
+      
       SetOrdersList({});
       SetSelectRequest(true);
       const source = Axios.CancelToken.source();
@@ -43,12 +46,12 @@ export default function EmployeeOrders() {
       return () => {
         source.cancel();
       };
-    }, [userData.ID]);
+    }, [userData.ID, openSuccess]);
 
-    const updateStatus = (status, callback) =>{
+    const updateStatus = (status, ID, callback) =>{
 
         Axios
-        .post("http://localhost:3001/api/status", {status: status})
+        .post("http://localhost:3001/api/status", {ID: ID, status: status})
         .then((response) => {
           callback(response.data)
         })
@@ -56,11 +59,13 @@ export default function EmployeeOrders() {
       }
 
     const selectRef = useRef(null);
-    const HandleSubmit = (event) =>{
+
+    const HandleSubmit = (event, ID) =>{
         event.preventDefault()
         const selectValue = selectRef.current.value;
-        updateStatus(selectValue, result =>{
-            console.log(result)
+        console.log(ID)
+        updateStatus(selectValue, ID, result =>{
+            setOpenSuccess(result)
         })
 
     }
@@ -119,8 +124,8 @@ export default function EmployeeOrders() {
                             })
                           }
                           </div>
-                    <form key={key} onSubmit={(event) => HandleSubmit(event)}>
-                    <div className='sub'>
+                    <form key={key} onSubmit={(event) => HandleSubmit(event, orderList[key].ID_zamowienie)}>
+                      <div className='sub'>
 
                         <select className="woj" id="status_"  ref={selectRef}>
                             <option value={1}>Wysłane</option>
@@ -140,5 +145,7 @@ export default function EmployeeOrders() {
                 ))
             )
         )
+
+
     )
 }

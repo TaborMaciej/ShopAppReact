@@ -22,7 +22,7 @@ module.exports = (app, db) => {
         ` INNER JOIN adres ON adres.ID = osoba.ID_adres` +
         ` INNER JOIN miasto ON adres.ID_miasto = miasto.ID` +
         ` INNER JOIN wojewodztwo ON miasto.ID_wojewodztwo = wojewodztwo.ID` +
-        ` WHERE zamowienie.ID_pracownik = ${mysql.escape(userID)}`+
+        ` WHERE zamowienie.ID_pracownik = ${mysql.escape(userID)} AND status.ID != 1`+
         ` ORDER BY zamowienie.ID;`
         db.query(sqlSelectProducts, (err, result) =>{
             if (err) throw err
@@ -56,7 +56,6 @@ module.exports = (app, db) => {
                 prevKey = element.ID_zamowienie
         
             });
-            console.log(ordersList)
             res.send(ordersList)
         })
     })
