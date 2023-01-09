@@ -6,6 +6,7 @@ import Register from "./components/Register.js";
 import Header from "./components/Header.js"
 import Cart from "./components/Cart.js"
 import Orders from "./components/Orders.js"
+import EmployeeOrders from './components/EmployeeOrders.js';
 
 const DataContext = createContext();
 
@@ -58,7 +59,8 @@ function App() {
             <Route exact path="/cart" element={<Cart itemState={cartState} />} />
             <Route exact path="/" element={<Home searchInput={searchInput}/>} />
             <Route exact path="/register" element={<Register />} />
-            <Route exact path="/orders" element={<Orders  itemState={cartState}/>} />
+            <Route exact path="/orders" element={<Orders/>} />
+            <Route exact path="/employee-orders" element={<EmployeeOrders/>} />
           </Routes>
       </Router>
     </DataContext.Provider>

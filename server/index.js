@@ -17,7 +17,7 @@ const employee = mysql.createPool({
     connectionLimit: 10,
     port: "3306",
     host: "localhost",
-    user: "pracownik_sklep'",
+    user: "pracownik_sklep",
     password: "pracownik",
     database: "sklep_z_grami"
 })
@@ -63,7 +63,13 @@ order(app, client);
 const userOrders = require('./routes/userOrders.js');
 userOrders(app, client);
 
+//get list of employee's orders
+const employeeOrders = require('./routes/employeeOrders.js');
+employeeOrders(app, employee)
 
+//update status
+const status = require('./routes/status.js');
+status(app, employee)
 app.listen(3001, () =>{
     console.log("Server running on port 3001");
 });

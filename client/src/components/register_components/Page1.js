@@ -2,7 +2,6 @@ import React from 'react'
 
 
 export default function Page1({registerData, setRegisterData}) {
-    console.log(registerData)
   return ( 
     <div className='login'>
         <input className='input_b'

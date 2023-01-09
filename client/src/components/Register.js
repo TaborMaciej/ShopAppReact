@@ -72,7 +72,6 @@ function Register() {
 
   const HandleSubmit = (event) => {
     event.preventDefault();
-    console.log(registerData)
     if (pageIndex !== pages.length - 1){
       setPageIndex(pageIndex + 1)
       return

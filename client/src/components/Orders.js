@@ -73,6 +73,7 @@ function Orders() {
                               return (
                                 <div key={key_} className="products-order">
                                   <p className="product-p-order">{orderList[key].Produkty[key_].Nazwa_gry}</p>
+                                  <p className="product-p-order">{orderList[key].Produkty[key_].System}</p>
                                   <p className="product-p-order">{(orderList[key].Produkty[key_].Cena * orderList[key].Produkty[key_].Ilosc).toFixed(2)}zł</p>
                                   <p className="product-p-order">Ilość sztuk: {orderList[key].Produkty[key_].Ilosc}</p>
                                 </div>
