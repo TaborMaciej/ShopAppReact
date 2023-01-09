@@ -24,11 +24,10 @@ function UserLogged() {
             <Modal open={isWorkBoxOpen}  onClose={() => setIsWorkBoxOpen(false)}>
                 {userData.isEmployee ? 
                     (
-
                         <>
-                        <button onClick={() => {  setIsWorkBoxOpen(false);  navigation("/employee-orders")}}  className='butt'><p>Zamówienia</p></button>
-                        <button onClick={() => {  setIsWorkBoxOpen(false);  navigation("/employee-add")}} className='butt'><p>Dodawanie produktów</p></button>
-                        <button onClick={() => {  setIsWorkBoxOpen(false);  navigation("/employee-add-game")}} className='butt'><p>Dodawanie produktów</p></button>
+                        <button onClick={() => {  setIsWorkBoxOpen(false);  navigation("/employee-orders")}}  className='butt'><p className='ins'>Zamówienia</p></button>
+                        <button onClick={() => {  setIsWorkBoxOpen(false);  navigation("/employee-add")}} className='butt'><p className='ins'>Dodawanie produktów</p></button>
+                        <button onClick={() => {  setIsWorkBoxOpen(false);  navigation("/employee-add-game")}} className='butt'><p className='ins'>Dodawanie gry</p></button>
                         </>
                     )
                     :
