@@ -92,7 +92,7 @@ function Cart(itemState) {
       </Modal>
 
       <Modal open={openSuccess} onClose={() => { SetOpenSuccess(false) }}>
-        <p>Zamówienie zostało złożone pomyślnie</p>
+        <p className='question'>Zamówienie zostało złożone pomyślnie</p>
       </Modal>
 
       </div>

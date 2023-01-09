@@ -67,3 +67,9 @@ font-size: 1rem;
     display: flex;
     margin-left: 35rem;    
 }
+
+.mod{
+    color: white;
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+    text-align: center;
+}
