@@ -28,6 +28,7 @@ function UserLogged() {
                         <>
                         <button onClick={() => {  setIsWorkBoxOpen(false);  navigation("/employee-orders")}}  className='butt'>Zamówienia</button>
                         <button onClick={() => {  setIsWorkBoxOpen(false);  navigation("/employee-add")}} className='butt'>Dodawanie produktów</button>
+                        <button onClick={() => {  setIsWorkBoxOpen(false);  navigation("/employee-add-game")}} className='butt'>Dodawanie produktów</button>
                         </>
                     )
                     :
