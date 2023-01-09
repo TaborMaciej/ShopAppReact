@@ -8,6 +8,7 @@ import UserNotLogged from "./UserNotLogged";
 import {Helmet} from "react-helmet";
 import logo from "../imgs/LogoShopp.png";
 import search from "../imgs/WhiteSearch.png";
+import Axios from "axios";
 
 
 
@@ -24,6 +25,14 @@ function Header({searchInput, setSearchInput}){
         return () => window.removeEventListener('scroll', handleScroll)
     });
 
+    const test = ()=>{
+        Axios
+        .post("http://localhost:3001/api/userOrders", {userID: userData.ID})
+        .then((response) => {
+          console.log(response.data)
+        })
+        .catch((err) => console.log(err));
+    }
     return(
     <>
         <Helmet>
@@ -33,6 +42,7 @@ function Header({searchInput, setSearchInput}){
 
         <nav className={"navbar"+ (sticky ? " sticky" : "")}>  
             <Link to="/"><img src={logo} alt="Company logo" className="nav-logo"/></Link>
+            <button onClick={() => test()}>TEST</button>
             <div className="right-nav">
                 <input className="search-bar" type="text" name="searchInput" value={searchInput} onChange={ (e) => setSearchInput(e.target.value) }/>
                 <button><img className="nav-img"src={search} alt="search"></img></button>

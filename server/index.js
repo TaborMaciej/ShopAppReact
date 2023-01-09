@@ -59,6 +59,11 @@ available(app, client);
 const order = require('./routes/order.js');
 order(app, client);
 
+//get list of user's orders
+const userOrders = require('./routes/userOrders.js');
+userOrders(app, client);
+
+
 app.listen(3001, () =>{
     console.log("Server running on port 3001");
 });
