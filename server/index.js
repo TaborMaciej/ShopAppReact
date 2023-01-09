@@ -8,28 +8,11 @@ const admin = mysql.createPool({
     connectionLimit: 10,
     port: "3306",
     host: "localhost",
-    user: "admin_sklep",
-    password: "admin",
+    user: "root",
+    password: "",
     database: "sklep_z_grami"
 })
 
-const employee = mysql.createPool({
-    connectionLimit: 10,
-    port: "3306",
-    host: "localhost",
-    user: "pracownik_sklep",
-    password: "pracownik",
-    database: "sklep_z_grami"
-})
-
-const client = mysql.createPool({
-    connectionLimit: 10,
-    port: "3306",
-    host: "localhost",
-    user: "klient_sklep",
-    password: "klient",
-    database: "sklep_z_grami"
-})
 
 app.use(cors());
 app.use(express.json());
@@ -49,35 +32,35 @@ register(app, admin);
 
 //get list of games
 const games = require('./routes/games.js');
-games(app, client);
+games(app, admin);
 
 //check if products are available
 const available = require('./routes/available.js');
-available(app, client);
+available(app, admin);
 
 //order products
 const order = require('./routes/order.js');
-order(app, client);
+order(app, admin);
 
 //get list of user's orders
 const userOrders = require('./routes/userOrders.js');
-userOrders(app, client);
+userOrders(app, admin);
 
 //get list of employee's orders
 const employeeOrders = require('./routes/employeeOrders.js');
-employeeOrders(app, employee)
+employeeOrders(app, admin)
 
 //update status
 const status = require('./routes/status.js');
-status(app, employee)
+status(app, admin)
 
 //get list of systems
 const system = require('./routes/system.js');
-system(app, employee)
+system(app, admin)
 
 //add product
 const addProduct = require('./routes/addProduct.js');
-addProduct(app, employee)
+addProduct(app, admin)
 
 app.listen(3001, () =>{
     console.log("Server running on port 3001");

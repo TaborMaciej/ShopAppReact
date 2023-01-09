@@ -26,8 +26,9 @@ function UserLogged() {
                     (
 
                         <>
-                        <button onClick={() => {  setIsWorkBoxOpen(false);  navigation("/employee-orders")}}  className='butt'>Zamówienia</button>
-                        <button onClick={() => {  setIsWorkBoxOpen(false);  navigation("/employee-add")}} className='butt'>Dodawanie produktów</button>
+                        <button onClick={() => {  setIsWorkBoxOpen(false);  navigation("/employee-orders")}}  className='butt'><p>Zamówienia</p></button>
+                        <button onClick={() => {  setIsWorkBoxOpen(false);  navigation("/employee-add")}} className='butt'><p>Dodawanie produktów</p></button>
+                        <button onClick={() => {  setIsWorkBoxOpen(false);  navigation("/employee-add-game")}} className='butt'><p>Dodawanie produktów</p></button>
                         </>
                     )
                     :

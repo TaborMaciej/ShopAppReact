@@ -8,6 +8,7 @@ import Cart from "./components/Cart.js"
 import Orders from "./components/Orders.js"
 import EmployeeOrders from './components/EmployeeOrders.js';
 import AddProduct from './components/AddProduct.js';
+import AddGame from './components/AddGame.js'
 
 const DataContext = createContext();
 
@@ -63,6 +64,8 @@ function App() {
             <Route exact path="/orders" element={<Orders/>} />
             <Route exact path="/employee-orders" element={<EmployeeOrders/>} />
             <Route exact path="/employee-add" element={<AddProduct/>} />
+            <Route exact path="/employee-add-game" element={<AddGame/>} />
+
           </Routes>
       </Router>
     </DataContext.Provider>

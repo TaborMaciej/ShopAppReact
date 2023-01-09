@@ -19,15 +19,15 @@ export default function AddProduct() {
 
     const [productData, setProductData] = useState(
       {
-        Cena_sprzedazy: "",
-        Cena_zakupu: "",
-        Rok_wydania: "",
-        ID_system: 1,
-        ID_gra: 1
+        Nazwa_gry: "",
+        sciezka_okladki: "",
+        ID_gatunek: 1,
+        ID_wydawnictwo: 1
       }
     ) 
     const [systemData, setSystemData] = useState([])
 
+    /*
     useEffect(() => {
       Axios
         .get("http://localhost:3001/api/system")
@@ -39,6 +39,7 @@ export default function AddProduct() {
         });
 
       }, [])
+      */
     
     const insertProduct = (callback) =>{
 
@@ -54,64 +55,50 @@ export default function AddProduct() {
 
     const HandleSubmit = (event) =>{
       event.preventDefault()
+      console.log(productData)
+      setOpenSuccess(true)
+      /*
       insertProduct(result =>{
-        setOpenSuccess(result)
     })
+    */
     }
 
     return (
         <div>
-          <h3 className='title'>Dodawanie produktu:</h3>
-          <div className='pagee'>
-
+          <h3 className='title'>Dodawanie gry:</h3>
           <form onSubmit={(event) => {HandleSubmit(event)}}>
-          <div className='inpu'>
             <input
-              className='input_box'
-              placeholder='Cena sprzedazy'
+              placeholder='Nazwa_gry'
               required 
               type='text'
-              value={productData.Cena_sprzedazy}
-              onChange={(e) => { setProductData({...productData, Cena_sprzedazy: e.target.value})}}
+              value={productData.Nazwa_gry}
+              onChange={(e) => { setProductData({...productData, Nazwa_gry: e.target.value})}}
             />
 
             <input
-              className='input_box'
-              placeholder='Cena zakupu'
+              placeholder='sciezka_okladki'
               required 
               type='text'
-              value={productData.Cena_zakupu}
-              onChange={(e) => { setProductData({...productData, Cena_zakupu: e.target.value})}}
+              value={productData.sciezka_okladki}
+              onChange={(e) => { setProductData({...productData, sciezka_okladki: e.target.value})}}
             />
 
-            <input
-            className='input_box'
-              placeholder='Rok wydania'
-              type='text'
-              value={productData.Rok_wydania}
-              onChange={(e) => { setProductData({...productData, Rok_wydania: e.target.value})}}
-            />
-            </div>
-            <div className='sel'>
-            <select className='woj' value={productData.ID_gra} onChange={(e) => { setProductData({...productData, ID_gra: e.target.value})}}>
+            <select value={productData.ID_gatunek} onChange={(e) => { setProductData({...productData, ID_gatunek: e.target.value})}}>
               {Object.keys(gameData).map(key =>{
-                return <option key={gameData[key].ID_gra} value={gameData[key].ID_gra}>{gameData[key].Nazwa_gry}</option>
+                return <option key={gameData[key].ID_gatunek} value={gameData[key].ID_gatunek}>{gameData[key].ID_gatunek}</option>
               })}
             </select>
 
-            <select className='woj' value={productData.ID_system} onChange={(e) => { setProductData({...productData, ID_system: e.target.value})}}>
+            <select value={productData.ID_wydawnictwo} onChange={(e) => { setProductData({...productData, ID_wydawnictwo: e.target.value})}}>
               {Object.keys(systemData).map(key =>{
-                return <option key={systemData[key].ID} value={systemData[key].ID}>{systemData[key].Nazwa}</option>
+                return <option key={systemData[key].ID_wydawnictwo} value={systemData[key].ID_wydawnictwo}>{systemData[key].ID_wydawnictwo}</option>
               })}
             </select>
-            </div>
-            <button className='add' type="submit"><p className='ins'>Dodaj produkt</p></button>
+            <button type="submit">Dodaj grę</button>
           </form>
           <Modal open={openSuccess} onClose={() => {setOpenSuccess(false)}}>
-            <p className='question'>Pomyślnie dodano produkt</p>
+            <p>Pomyślnie dodano produkt</p>
           </Modal>
-          </div>
-
         </div>
     )
 }
