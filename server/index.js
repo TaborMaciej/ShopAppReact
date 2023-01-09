@@ -72,8 +72,12 @@ const status = require('./routes/status.js');
 status(app, employee)
 
 //get list of systems
-const system = require('./routes/system.js')
+const system = require('./routes/system.js');
 system(app, employee)
+
+//add product
+const addProduct = require('./routes/addProduct.js');
+addProduct(app, employee)
 
 app.listen(3001, () =>{
     console.log("Server running on port 3001");

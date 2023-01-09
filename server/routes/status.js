@@ -7,7 +7,6 @@ module.exports = (app, db) => {
         console.log("ID_statu: " + req.body.status)
         db.query(sqlUpdate, (err, result) =>{
             if (err) throw err
-            console.log(result)
             res.send(true)
         })
 

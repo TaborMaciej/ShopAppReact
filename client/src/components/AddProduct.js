@@ -2,6 +2,8 @@ import React, {useContext, useState, useEffect} from 'react'
 import { DataContext } from '../App'
 import { useNavigate } from 'react-router-dom'
 import Axios from 'axios'
+import Modal from './Modal'
+
 export default function AddProduct() {
     const {userData, gameData} = useContext(DataContext)
     const navigation = useNavigate()
@@ -35,10 +37,24 @@ export default function AddProduct() {
         });
 
       }, [])
+    
+    const insertProduct = (callback) =>{
+
+        Axios
+        .post("http://localhost:3001/api/add-product", {data: productData})
+        .then((response) => {
+          callback(response.data)
+        })
+        .catch((err) => console.log(err));
+    }
+
+    const [openSuccess, setOpenSuccess] = useState(false)
 
     const HandleSubmit = (event) =>{
       event.preventDefault()
-      console.log(productData)
+      insertProduct(result =>{
+        setOpenSuccess(result)
+    })
     }
 
     return (
@@ -80,6 +96,9 @@ export default function AddProduct() {
             </select>
             <button type="submit">Dodaj produkt</button>
           </form>
+          <Modal open={openSuccess} onClose={() => {setOpenSuccess(false)}}>
+            <p>Pomyślnie dodano produkt</p>
+          </Modal>
         </div>
     )
 }
